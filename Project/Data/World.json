@@ -9,6 +9,13 @@
     "E": "enemy",
     "P": "player"
   },
+  "mapTileTypes": {
+    "player": 0,
+    "enemy": 1,
+    "chest": 2,
+    "item": 3, //for dropped items
+    "obstacle": 4 //for moutains and trees (will make things a bit easier)
+  },
   "map": [
     [ "P", "M", ".", ".", ".", "T", ".", ".", "C", "M" ],
     [ ".", ".", ".", "T", ".", ".", ".", "T", ".", "." ],
@@ -23,42 +30,43 @@
   ],
   "entities": {
     "player": {
+      "type": 0,
       "x": 0,
       "y": 0
     },
     "enemies": [
       {
-        "type": "enemy",
+        "type": 1,
         "x": 3,
         "y": 5
       },
       {
-        "type": "enemy",
+        "type": 1,
         "x": 8,
         "y": 6
       }
     ],
     "chests": [
       {
-        "type": "chest",
+        "type": 2,
         "x": 8,
         "y": 0,
         "contents": [ "sword" ]
       },
       {
-        "type": "chest",
+        "type": 2,
         "x": 4,
         "y": 3,
         "contents": [ "potion" ]
       },
       {
-        "type": "chest",
+        "type": 2,
         "x": 5,
         "y": 5,
         "contents": [ "armor" ]
       },
       {
-        "type": "chest",
+        "type": 2,
         "x": 0,
         "y": 7,
         "contents": [ "shield" ]
