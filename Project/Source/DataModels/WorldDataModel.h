@@ -21,7 +21,8 @@ public:
     int GetWidth() const;
     int GetHeight() const;
     char GetTileAt(int row, int column) const;
-    std::shared_ptr<Entity> GetEntityAt(int x, int y) const;
+    int GetEntityNextId() const;
+    std::shared_ptr<Entity> GetEntityAt(int row, int column) const;
     std::shared_ptr<Entity> GetEntityById(int id) const;
     std::vector<std::shared_ptr<Entity>> GetEnemies() const;
 #pragma endregion    

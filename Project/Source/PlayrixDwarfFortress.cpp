@@ -2,8 +2,8 @@
 //
 
 #include <iostream>
-#include "Source/Game.h"
-#include "Source/OutputLogger/OutputWindowLogger.h"
+#include "Game.h"
+#include "OutputLogger/OutputWindowLogger.h"
 
 int main()
 {

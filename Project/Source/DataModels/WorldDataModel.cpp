@@ -1,4 +1,5 @@
 #include "WorldDataModel.h"
+#include "../Domains/Entities/Entity.h"
 
 WorldDataModel::WorldDataModel() : mapWidth(0), mapHeight(0)
 {
@@ -28,19 +29,43 @@ char WorldDataModel::GetTileAt(int row, int column) const
     return map[row][column];
 }
 
-std::shared_ptr<Entity> WorldDataModel::GetEntityAt(int x, int y) const
+int WorldDataModel::GetEntityNextId() const
 {
-    return std::shared_ptr<Entity>();
+    int nextId = entities.size() + 1;
+    return nextId;
+}
+
+std::shared_ptr<Entity> WorldDataModel::GetEntityAt(int row, int column) const
+{
+    for (const auto& pair : entities)
+    {
+        const auto& entity = pair.second;  // Access the shared_ptr<Entity>
+        if (entity->GetRow() == row && entity->GetColumn() == column)
+        {
+            return entity;
+        }
+    }
+
+    return nullptr;  // Return nullptr if no entity is found at the position
 }
 
 std::shared_ptr<Entity> WorldDataModel::GetEntityById(int id) const
 {
-    return std::shared_ptr<Entity>();
+    return entities.at(id);
 }
 
 std::vector<std::shared_ptr<Entity>> WorldDataModel::GetEnemies() const
 {
-    return std::vector<std::shared_ptr<Entity>>();
+    std::vector<std::shared_ptr<Entity>> enemies;
+    for (const auto& entity : entities) 
+    {
+        if (entity.second->GetType() == static_cast<int>(EntityType::Enemy)) 
+        {
+            enemies.push_back(entity.second);
+        }
+    }
+
+    return enemies;
 }
 
 void WorldDataModel::SetMapSize(int newWidth, int newHeight)
@@ -55,7 +80,5 @@ void WorldDataModel::SetTileAt(int row, int column, char value)
 
 void WorldDataModel::AddEntity(std::shared_ptr<Entity> entity)
 {
-    int lastAddedId = entities.size();
-    //set entity id
-    entities[++lastAddedId] = entity;
+    entities[entity->GetId()] = entity;
 }

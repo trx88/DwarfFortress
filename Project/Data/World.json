@@ -12,9 +12,9 @@
   "mapTileTypes": {
     "player": 0,
     "enemy": 1,
-    "chest": 2,
-    "item": 3, //for dropped items
-    "obstacle": 4 //for moutains and trees (will make things a bit easier)
+    "obstacle": 2, //for moutains and trees (will make things a bit easier)
+    "chest": 3,
+    "item": 4 //for dropped items
   },
   "map": [
     [ "P", "M", ".", ".", ".", "T", ".", ".", "C", "M" ],
@@ -31,44 +31,156 @@
   "entities": {
     "player": {
       "type": 0,
-      "x": 0,
-      "y": 0
+      "column": 0,
+      "row": 0
     },
     "enemies": [
       {
         "type": 1,
-        "x": 3,
-        "y": 5
+        "column": 3,
+        "row": 5
       },
       {
         "type": 1,
-        "x": 8,
-        "y": 6
+        "column": 8,
+        "row": 6
+      }
+    ],
+    "obstacles": [
+      {
+        "type": 3,
+        "column": 1,
+        "row": 0
+      },
+      {
+        "type": 3,
+        "column": 9,
+        "row": 0
+      },
+      {
+        "type": 3,
+        "column": 5,
+        "row": 0
+      },
+      {
+        "type": 3,
+        "column": 3,
+        "row": 1
+      },
+      {
+        "type": 3,
+        "column": 7,
+        "row": 1
+      },
+      {
+        "type": 3,
+        "column": 0,
+        "row": 2
+      },
+      {
+        "type": 3,
+        "column": 2,
+        "row": 2
+      },
+      {
+        "type": 3,
+        "column": 6,
+        "row": 2
+      },
+      {
+        "type": 3,
+        "column": 9,
+        "row": 3
+      },
+      {
+        "type": 3,
+        "column": 1,
+        "row": 4
+      },
+      {
+        "type": 3,
+        "column": 2,
+        "row": 4
+      },
+      {
+        "type": 3,
+        "column": 7,
+        "row": 4
+      },
+      {
+        "type": 3,
+        "column": 5,
+        "row": 5
+      },
+      {
+        "type": 3,
+        "column": 1,
+        "row": 5
+      },
+      {
+        "type": 3,
+        "column": 6,
+        "row": 6
+      },
+      {
+        "type": 3,
+        "column": 2,
+        "row": 7
+      },
+      {
+        "type": 3,
+        "column": 7,
+        "row": 7
+      },
+      {
+        "type": 3,
+        "column": 1,
+        "row": 8
+      },
+      {
+        "type": 3,
+        "column": 3,
+        "row": 8
+      },
+      {
+        "type": 3,
+        "column": 7,
+        "row": 8
+      },
+      {
+        "type": 3,
+        "column": 3,
+        "row": 9
+      },
+      {
+        "type": 3,
+        "column": 9,
+        "row": 9
       }
     ],
     "chests": [
       {
-        "type": 2,
-        "x": 8,
-        "y": 0,
+        "type": 3,
+        "column": 8,
+        "row": 0,
         "contents": [ "sword" ]
       },
       {
-        "type": 2,
-        "x": 4,
-        "y": 3,
+        "type": 3,
+        "column": 4,
+        "row": 3,
         "contents": [ "potion" ]
       },
       {
-        "type": 2,
-        "x": 5,
-        "y": 5,
+        "type": 3,
+        "column": 5,
+        "row": 5,
         "contents": [ "armor" ]
       },
       {
-        "type": 2,
-        "x": 0,
-        "y": 7,
+        "type": 3,
+        "column": 0,
+        "row": 7,
         "contents": [ "shield" ]
       }
     ]
