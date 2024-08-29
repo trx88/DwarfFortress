@@ -2,10 +2,30 @@
 //
 
 #include <iostream>
+#include <sstream>
+#include "Source/Game.h"
+
+#ifdef _MSC_VER
+#include "Windows.h"
+#endif
+
+#if !defined(NDEBUG) && defined(_MSC_VER)
+#define LOG(args)            \
+{                             \
+   std::wostringstream os_;    \
+   os_ << "\n\n";                   \
+   os_ << args;                   \
+   os_ << "\n\n";                   \
+   OutputDebugString( os_.str().c_str() );  \
+}
+#else
+#define LOG(args)
+#endif
 
 int main()
 {
     std::cout << "Hello World!\n";
+    LOG("Game started!")
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
