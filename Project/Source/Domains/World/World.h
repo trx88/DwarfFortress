@@ -2,6 +2,7 @@
 #include <string>
 #include "../../DataModels/WorldDataModel.h"
 #include <nlohmann/json.hpp>
+#include <boost/signals2/signal.hpp>
 
 class World
 {
@@ -15,5 +16,10 @@ public:
 	World();
 	~World();
 	bool initializeFromJSON(const std::string& filePath);
+	bool isTileOccupied(int row, int column) const;
+	bool MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn);
+	
+	//TODO: Should probably move this to the Controller
+	boost::signals2::signal<void(WorldDataModel* worldDataModel)> worldDataUpdated;
 };
 

@@ -3,9 +3,10 @@
 enum class EntityType {
     Player = 0,
     Enemy = 1,
-	Obstacle = 2,
-    Chest = 3,
-	Item = 4
+	Mountain = 2,
+	Tree = 3,
+    Chest = 4,
+	Item = 5
 };
 
 class Entity

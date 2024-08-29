@@ -48,9 +48,13 @@ char Entity::GetTileSymbol() const
 		{
 			return 'E';
 		}break;
-		case static_cast<int>(EntityType::Obstacle):
+		case static_cast<int>(EntityType::Mountain):
 		{
-			return 'O';//NOT NEEDED
+			return 'M';
+		}break;
+		case static_cast<int>(EntityType::Tree):
+		{
+			return 'T';
 		}break;
 		case static_cast<int>(EntityType::Chest):
 		{

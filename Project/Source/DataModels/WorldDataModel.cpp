@@ -70,7 +70,9 @@ std::vector<std::shared_ptr<Entity>> WorldDataModel::GetEnemies() const
 
 void WorldDataModel::SetMapSize(int newWidth, int newHeight)
 {
-    map.resize(newHeight, std::vector<char>(newWidth, '.'));
+    mapWidth = newWidth;
+    mapHeight = newHeight;
+    map.resize(newHeight, std::vector<char>(newWidth, ' '));
 }
 
 void WorldDataModel::SetTileAt(int row, int column, char value)
