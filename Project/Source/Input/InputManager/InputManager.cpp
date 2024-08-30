@@ -62,10 +62,6 @@ void InputManager::ProcessInput()
             delete command;
 
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
-            //TODO: Move this somewhere else
-            // Trigger enemy movement after player action
-            //executeEnemyTurn(world);
         }
     }
 }

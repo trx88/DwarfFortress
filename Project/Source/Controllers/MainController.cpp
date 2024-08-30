@@ -10,11 +10,6 @@ MainController::~MainController()
 {
 }
 
-void MainController::GameLoop()
-{
-	
-}
-
 void MainController::PlayerMoved(std::shared_ptr<Player> player)
 {
 	//TODO: Execute enemy turn

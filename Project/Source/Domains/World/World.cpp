@@ -80,7 +80,7 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         if (targetEntity && targetEntity->GetType() == static_cast<int>(EntityType::Chest)) 
         {
             //TODO: Pick up item
-            //auto player = std::dynamic_pointer_cast<Player>(entity);
+            //auto player = std::static_pointer_cast<Player>(entity);
             //if (player) {
             //    player->pickUpItemsFrom(targetEntity);
             //    //removeEntity(targetEntity); // Remove chest after looting

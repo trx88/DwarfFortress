@@ -8,12 +8,10 @@ class InputManager;
 
 class MainController
 {
-private:
-	//InputManager
 public:
 	MainController(std::shared_ptr<World> world, InputManager* inputManager);
 	~MainController();
-	void GameLoop();
+	//TODO: Maybe move to private?
 	void PlayerMoved(std::shared_ptr<Player> player);
 };
 
