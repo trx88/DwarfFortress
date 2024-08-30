@@ -14,7 +14,7 @@ World::~World()
 {
 }
 
-bool World::initializeFromJSON(const std::string& filePath)
+bool World::InitializeFromJSON(const std::string& filePath)
 {
     try
     {
@@ -105,6 +105,11 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
 std::shared_ptr<Player> World::GetPlayer()
 {
     return std::static_pointer_cast<Player>(worldData->GetEntityById(1));
+}
+
+std::vector<std::shared_ptr<Entity>> World::GetEnemies()
+{
+    return worldData->GetEnemies();
 }
 
 void World::parseMap(const nlohmann::json& mapData)
