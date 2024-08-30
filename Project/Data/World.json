@@ -3,11 +3,12 @@
   "height": 10,
   "legend": {
     ".": "empty",
+    "P": "player",
+    "E": "enemy",
     "M": "mountain",
     "T": "tree",
     "C": "chest",
-    "E": "enemy",
-    "P": "player"
+    "I": "item"
   },
   "mapTileTypes": {
     "player": 0,

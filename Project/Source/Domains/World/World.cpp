@@ -43,8 +43,14 @@ bool World::initializeFromJSON(const std::string& filePath)
     }
 }
 
-bool World::isTileOccupied(int row, int column) const
+bool World::IsTileValidForMovement(int row, int column) const
 {
+    if (row < 0 || row >= worldData->GetHeight() || column < 0 || column >= worldData->GetWidth())
+    {
+        //Out of bounds!
+        return true;
+    }
+
     auto entity = worldData->GetEntityAt(row, column);
     if (entity) 
     {
@@ -67,7 +73,7 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
     int oldRow = entity->GetRow();
     int oldColumn = entity->GetColumn();
 
-    if (!isTileOccupied(newRow, newColumn))
+    if (!IsTileValidForMovement(newRow, newColumn))
     {
         auto targetEntity = worldData->GetEntityAt(newRow, newColumn);
         if (targetEntity && targetEntity->GetType() == static_cast<int>(EntityType::Chest)) 

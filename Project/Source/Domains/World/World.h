@@ -16,7 +16,7 @@ public:
 	World();
 	~World();
 	bool initializeFromJSON(const std::string& filePath);
-	bool isTileOccupied(int row, int column) const;
+	bool IsTileValidForMovement(int row, int column) const;
 	bool MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn);
 	
 	//TODO: Should probably move this to the Controller
