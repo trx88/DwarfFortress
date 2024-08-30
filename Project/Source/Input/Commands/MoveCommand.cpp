@@ -8,13 +8,16 @@ MoveCommand::MoveCommand(int deltaColumn, int deltaRow)
 	this->deltaRow = deltaRow;
 }
 
-void MoveCommand::execute(World& world, std::shared_ptr<Entity> entity)
+bool MoveCommand::execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity)
 {
 	int newColumn = entity->GetColumn() + deltaColumn;
 	int newRow = entity->GetRow() + deltaRow;
 
-	if (world.IsTileValidForMovement(newRow, newColumn))
+	if (world->IsTileValidForMovement(newRow, newColumn))
 	{
-		world.MoveEntity(entity, newRow, newColumn);
+		world->MoveEntity(entity, newRow, newColumn);
+		return true;
 	}
+
+	return false;
 }

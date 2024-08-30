@@ -7,6 +7,6 @@ private:
 	int deltaColumn, deltaRow = 0;
 public:
 	MoveCommand(int deltaColumn, int deltaRow);
-	void execute(World& world, std::shared_ptr<Entity> entity) override;
+	bool execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity) override;
 };
 
