@@ -1,16 +1,21 @@
 #pragma once
 #include <memory>
-#include "Domains/World/World.h"
-#include "Views/MapSubView.h"
-#include "Domains/Entities/Player.h"
+
+class World;
+class Player;
+class MapSubView;
+class InputManager;
+class MainController;
 
 class Game {
 public:
     Game();
+    ~Game();
     void Run();
 
 private:
     std::shared_ptr<World> world;
-    std::shared_ptr<Player> player;
     std::shared_ptr<MapSubView> view;
+    std::unique_ptr<MainController> controller;
+    std::unique_ptr<InputManager> inputManager;
 };

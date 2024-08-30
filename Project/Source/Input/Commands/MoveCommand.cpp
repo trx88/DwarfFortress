@@ -13,9 +13,8 @@ bool MoveCommand::execute(std::shared_ptr<World> world, std::shared_ptr<Entity> 
 	int newColumn = entity->GetColumn() + deltaColumn;
 	int newRow = entity->GetRow() + deltaRow;
 
-	if (world->IsTileValidForMovement(newRow, newColumn))
+	if (world->MoveEntity(entity, newRow, newColumn))
 	{
-		world->MoveEntity(entity, newRow, newColumn);
 		return true;
 	}
 

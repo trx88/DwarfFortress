@@ -8,5 +8,6 @@
 int main()
 {
     Game game;
+    game.Run();
     OutputWindowLogger::LogToOutput("Game started!");
 }

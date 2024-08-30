@@ -18,8 +18,9 @@ public:
 	bool initializeFromJSON(const std::string& filePath);
 	bool IsTileValidForMovement(int row, int column) const;
 	bool MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn);
+	std::shared_ptr<class Player> GetPlayer();
 	
 	//TODO: Should probably move this to the Controller
-	boost::signals2::signal<void(WorldDataModel* worldDataModel)> worldDataUpdated;
+	boost::signals2::signal<void(WorldDataModel* worldDataModel)> onWorldDataUpdated;
 };
 

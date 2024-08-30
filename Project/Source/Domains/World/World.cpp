@@ -2,6 +2,7 @@
 #include <fstream>
 #include "../../DataModels/WorldDataModel.h"
 #include "../../Domains/Entities/Entity.h"
+#include "../../Domains/Entities/Player.h"
 #include <iostream>
 
 World::World()
@@ -32,7 +33,7 @@ bool World::initializeFromJSON(const std::string& filePath)
         parseMap(jsonData["map"]);
         parseEntities(jsonData["entities"]);
 
-        worldDataUpdated(worldData.get());
+        onWorldDataUpdated(worldData.get());
 
         return true;
     }
@@ -48,7 +49,7 @@ bool World::IsTileValidForMovement(int row, int column) const
     if (row < 0 || row >= worldData->GetHeight() || column < 0 || column >= worldData->GetWidth())
     {
         //Out of bounds!
-        return true;
+        return false;
     }
 
     auto entity = worldData->GetEntityAt(row, column);
@@ -59,13 +60,13 @@ bool World::IsTileValidForMovement(int row, int column) const
         if (entity->GetType() == static_cast<int>(EntityType::Mountain) ||
             entity->GetType() == static_cast<int>(EntityType::Tree))
         {
-            return true; // Block movement
+            return false; // Block movement
         }
         // If it's a chest or another non-blocking entity, allow movement
-        return false;
+        return true;
     }
     // No entity at this position, so it's not occupied
-    return false;
+    return true;
 }
 
 bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn)
@@ -73,7 +74,7 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
     int oldRow = entity->GetRow();
     int oldColumn = entity->GetColumn();
 
-    if (!IsTileValidForMovement(newRow, newColumn))
+    if (IsTileValidForMovement(newRow, newColumn))
     {
         auto targetEntity = worldData->GetEntityAt(newRow, newColumn);
         if (targetEntity && targetEntity->GetType() == static_cast<int>(EntityType::Chest)) 
@@ -93,12 +94,17 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         entity->SetPosition(newRow, newColumn);
 
         // Emit signal indicating the entity has moved
-        worldDataUpdated(worldData.get());
+        onWorldDataUpdated(worldData.get());
 
         return true;
     }
 
     return false;
+}
+
+std::shared_ptr<Player> World::GetPlayer()
+{
+    return std::static_pointer_cast<Player>(worldData->GetEntityById(1));
 }
 
 void World::parseMap(const nlohmann::json& mapData)

@@ -6,10 +6,10 @@
 #include <chrono>
 #include <thread>
 
-InputManager::InputManager(std::shared_ptr<World> world, std::shared_ptr<Player> player)
+InputManager::InputManager(std::shared_ptr<World> world)
 {
 	this->world = world;
-	this->player = player;
+    this->player = world->GetPlayer();
 }
 
 InputManager::~InputManager()
@@ -21,7 +21,6 @@ void InputManager::ProcessInput()
     char input;
 
     //SPECIFICALLY FOR WINDOWS
-
     // Check if a key has been pressed
     if (_kbhit())
     {
@@ -33,19 +32,19 @@ void InputManager::ProcessInput()
         {
             case CommandKeys::MOVE_UP:
             {
-                command = new MoveCommand(0, -1); // Move up
+                command = new MoveCommand(0, -1);
             } break;
             case CommandKeys::MOVE_DOWN:
             {
-                command = new MoveCommand(0, 1);  // Move down
+                command = new MoveCommand(0, 1);
             } break;
             case CommandKeys::MOVE_LEFT:
             {
-                command = new MoveCommand(-1, 0); // Move left
+                command = new MoveCommand(-1, 0);
             } break;
             case CommandKeys::MOVE_RIGHT:
             {
-                command = new MoveCommand(1, 0);  // Move right
+                command = new MoveCommand(1, 0);
             } break;
             case CommandKeys::GAME_QUIT:
             {
@@ -56,7 +55,10 @@ void InputManager::ProcessInput()
 
         if (command)
         {
-            command->execute(world, player);
+            if (command->execute(world, player))
+            {
+                onPlayerTurnEnded(player);
+            }
             delete command;
 
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -66,55 +68,4 @@ void InputManager::ProcessInput()
             //executeEnemyTurn(world);
         }
     }
-
-    //while (true)
-    //{
-    //    //SPECIFICALLY FOR WINDOWS
-
-    //    // Check if a key has been pressed
-    //    if (_kbhit())
-    //    {
-    //        input = _getch(); // Capture single keypress without showing it in the console
-
-    //        Command* command = nullptr;
-
-    //        switch (input)
-    //        {
-    //        case CommandKeys::MOVE_UP:
-    //        {
-    //            command = new MoveCommand(0, -1); // Move up
-    //        }break;
-    //        case CommandKeys::MOVE_DOWN:
-    //        {
-    //            command = new MoveCommand(0, 1);  // Move down
-    //        }break;
-    //        case CommandKeys::MOVE_LEFT:
-    //        {
-    //            command = new MoveCommand(-1, 0); // Move left
-    //        }break;
-    //        case CommandKeys::MOVE_RIGHT:
-    //        {
-    //            command = new MoveCommand(1, 0);  // Move right
-    //        }break;
-    //        case CommandKeys::GAME_QUIT:
-    //        {
-    //            //TODO: Handle this better
-    //            return; // Quit game loop
-    //        }break;
-    //        }
-
-    //        if (command)
-    //        {
-    //            command->execute(world, player);
-    //            delete command;
-
-    //            //TODO: Move this somewhere else
-    //            // Trigger enemy movement after player action
-    //            //executeEnemyTurn(world);
-    //        }
-    //    }
-
-    //    // Optionally, add a small delay to avoid CPU overuse
-    //    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    //}
 }

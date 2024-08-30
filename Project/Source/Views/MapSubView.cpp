@@ -5,7 +5,7 @@
 
 MapSubView::MapSubView(std::shared_ptr<World> world)
 {
-	world->worldDataUpdated.connect([this](WorldDataModel* worldDataMode) {UpdateView(worldDataMode); });
+	world->onWorldDataUpdated.connect([this](WorldDataModel* worldDataMode) {UpdateView(worldDataMode); });
 }
 
 void MapSubView::UpdateView(WorldDataModel* worldDataModel)
