@@ -3,9 +3,7 @@
 #include <unordered_map>
 #include <memory>
 #include <string>
-
-//Forward declaration
-class Entity;
+#include "../Domains/Entities/Entity.h"
 
 class WorldDataModel
 {
@@ -24,7 +22,7 @@ public:
     int GetEntityNextId() const;
     std::shared_ptr<Entity> GetEntityAt(int row, int column) const;
     std::shared_ptr<Entity> GetEntityById(int id) const;
-    std::vector<std::shared_ptr<Entity>> GetEnemies() const;
+    std::vector<std::shared_ptr<Entity>> GetEntitiesByType(EntityType entityType) const;
 #pragma endregion    
 #pragma region Setters
     void SetMapSize(int newWidth, int newHeight);

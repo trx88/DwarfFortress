@@ -1,7 +1,9 @@
 #include "Entity.h"
+#include "../../DataModels/EntityStatsDataModel.h"
 
 Entity::Entity() : id(-1), type(-1), row(-1), column(-1)
 {
+	statsData = std::make_unique<EntityStatsDataModel>();
 }
 
 Entity::Entity(int id, int type, int row, int column)
@@ -10,6 +12,16 @@ Entity::Entity(int id, int type, int row, int column)
 	this->type = type;
 	this->row = row;
 	this->column = column;
+	statsData = std::make_unique<EntityStatsDataModel>();
+}
+
+Entity::Entity(int id, int type, int row, int column, int health, int armor, int damage)
+{
+	this->id = id;
+	this->type = type;
+	this->row = row;
+	this->column = column;
+	statsData = std::make_unique<EntityStatsDataModel>(health, armor, damage);
 }
 
 Entity::~Entity()
@@ -59,10 +71,6 @@ char Entity::GetTileSymbol() const
 		case static_cast<int>(EntityType::Chest):
 		{
 			return 'C';
-		}break;
-		case static_cast<int>(EntityType::Item):
-		{
-			return 'I';//PROBABLY NOT NEEDED
 		}break;
 		default:
 		{

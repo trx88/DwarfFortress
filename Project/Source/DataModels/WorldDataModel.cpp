@@ -1,5 +1,4 @@
 #include "WorldDataModel.h"
-#include "../Domains/Entities/Entity.h"
 
 WorldDataModel::WorldDataModel() : mapWidth(0), mapHeight(0)
 {
@@ -31,7 +30,7 @@ char WorldDataModel::GetTileAt(int row, int column) const
 
 int WorldDataModel::GetEntityNextId() const
 {
-    int nextId = entities.size() + 1;
+    int nextId = (int)entities.size() + 1;
     return nextId;
 }
 
@@ -54,18 +53,18 @@ std::shared_ptr<Entity> WorldDataModel::GetEntityById(int id) const
     return entities.at(id);
 }
 
-std::vector<std::shared_ptr<Entity>> WorldDataModel::GetEnemies() const
+std::vector<std::shared_ptr<Entity>> WorldDataModel::GetEntitiesByType(EntityType entityType) const
 {
-    std::vector<std::shared_ptr<Entity>> enemies;
-    for (const auto& entity : entities) 
+    std::vector<std::shared_ptr<Entity>> entitiesByType;
+    for (const auto& entity : entities)
     {
-        if (entity.second->GetType() == static_cast<int>(EntityType::Enemy)) 
+        if (entity.second->GetType() == static_cast<int>(entityType))
         {
-            enemies.push_back(entity.second);
+            entitiesByType.push_back(entity.second);
         }
     }
 
-    return enemies;
+    return entitiesByType;
 }
 
 void WorldDataModel::SetMapSize(int newWidth, int newHeight)

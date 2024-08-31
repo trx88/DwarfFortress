@@ -19,7 +19,7 @@ public:
 	bool IsTileValidForMovement(int row, int column) const;
 	bool MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn);
 	std::shared_ptr<class Player> GetPlayer();
-	std::vector<std::shared_ptr<Entity>> GetEnemies();
+	std::vector<std::shared_ptr<class Enemy>> GetEnemies();
 	
 	//TODO: Should probably move this to the Controller
 	boost::signals2::signal<void(WorldDataModel* worldDataModel)> onWorldDataUpdated;

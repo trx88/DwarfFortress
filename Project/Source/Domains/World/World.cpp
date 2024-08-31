@@ -3,6 +3,7 @@
 #include "../../DataModels/WorldDataModel.h"
 #include "../../Domains/Entities/Entity.h"
 #include "../../Domains/Entities/Player.h"
+#include "../../Domains/Entities/Enemy.h"
 #include <iostream>
 
 World::World()
@@ -18,9 +19,7 @@ bool World::InitializeFromJSON(const std::string& filePath)
 {
     try
     {
-        //std::string test = "I:\\Playrix\\PlayrixDwarfFortress\\Project\\Data\\World.json";
         std::ifstream file(filePath);
-        //std::ifstream file(test);
         if (!file.is_open()) {
             throw std::runtime_error("Could not open file: " + filePath);
         }
@@ -41,6 +40,7 @@ bool World::InitializeFromJSON(const std::string& filePath)
     {
         std::cerr << "Error: " << e.what() << std::endl;
         // Handle the exception as needed
+        return false;
     }
 }
 
@@ -59,13 +59,29 @@ void World::parseEntities(const nlohmann::json& entitiesData)
 {
     // Parse player
     auto playerData = entitiesData["player"];
-    auto player = std::make_shared<Entity>(worldData->GetEntityNextId(), playerData["type"], playerData["row"], playerData["column"]);
+    auto playerStatsData = playerData["stats"];
+    auto player = std::make_shared<Player>(
+        worldData->GetEntityNextId(), 
+        playerData["type"], 
+        playerData["row"], 
+        playerData["column"],
+        playerStatsData["health"],
+        playerStatsData["armor"],
+        playerStatsData["damage"]);
     worldData->AddEntity(player);
 
     // Parse enemies
     for (const auto& enemyData : entitiesData["enemies"])
     {
-        auto enemy = std::make_shared<Entity>(worldData->GetEntityNextId(), enemyData["type"], enemyData["row"], enemyData["column"]);
+        auto enemyStatsData = enemyData["stats"];
+        auto enemy = std::make_shared<Entity>(
+            worldData->GetEntityNextId(), 
+            enemyData["type"], 
+            enemyData["row"], 
+            enemyData["column"],
+            enemyStatsData["health"],
+            enemyStatsData["armor"],
+            enemyStatsData["damage"]);
         worldData->AddEntity(enemy);
     }
 
@@ -145,10 +161,16 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
 
 std::shared_ptr<Player> World::GetPlayer()
 {
-    return std::static_pointer_cast<Player>(worldData->GetEntityById(1));
+    return std::static_pointer_cast<Player>(worldData->GetEntitiesByType(EntityType::Player).back());
 }
 
-std::vector<std::shared_ptr<Entity>> World::GetEnemies()
+std::vector<std::shared_ptr<Enemy>> World::GetEnemies()
 {
-    return worldData->GetEnemies();
+    std::vector<std::shared_ptr<Enemy>> enemies;
+    for (const auto& enemy : worldData->GetEntitiesByType(EntityType::Enemy))
+    {
+        enemies.push_back(std::static_pointer_cast<Enemy>(enemy));
+    }
+
+    return enemies;
 }

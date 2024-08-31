@@ -7,8 +7,7 @@
     "E": "enemy",
     "M": "mountain",
     "T": "tree",
-    "C": "chest",
-    "I": "item"
+    "C": "chest"
   },
   "mapTileTypes": {
     "player": 0,
@@ -34,18 +33,33 @@
     "player": {
       "type": 0,
       "column": 0,
-      "row": 0
+      "row": 0,
+      "stats": {
+        "health": 10,
+        "armor": 0,
+        "damage": 2
+      }
     },
     "enemies": [
       {
         "type": 1,
         "column": 3,
-        "row": 5
+        "row": 5,
+        "stats": {
+          "health": 2,
+          "armor": 0,
+          "damage": 2
+        }
       },
       {
         "type": 1,
         "column": 8,
-        "row": 6
+        "row": 6,
+        "stats": {
+          "health": 6,
+          "armor": 1,
+          "damage": 4
+        }
       }
     ],
     "obstacles": [

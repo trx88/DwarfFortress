@@ -2,6 +2,7 @@
 #include "../Input/InputManager/InputManager.h"
 #include "../Domains/World/World.h"
 #include "../Domains/Entities/Player.h"
+#include "../Domains/Entities/Enemy.h"
 #include "../Input/Commands/MoveCommand.h"
 
 MainController::MainController(std::shared_ptr<World> world, InputManager* inputManager)
