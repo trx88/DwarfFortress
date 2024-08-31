@@ -9,7 +9,7 @@ Game::Game()
 {
     world = std::make_shared<World>();
     view = std::make_shared<MapSubView>(world);
-    world->initializeFromJSON("Data\\World.json");
+    world->InitializeFromJSON("Data\\World.json");
     inputManager = std::make_unique<InputManager>(world);
     controller = std::make_unique<MainController>(world, inputManager.get());
 }

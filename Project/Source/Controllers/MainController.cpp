@@ -16,7 +16,6 @@ MainController::~MainController()
 
 void MainController::OnPlayerMoved(std::shared_ptr<Player> player)
 {
-	//TODO: Execute enemy turn
 	MoveEnemies(player);
 }
 
@@ -72,7 +71,7 @@ void MainController::MoveEnemies(std::shared_ptr<Player> player)
 		}
 
 		//If direct path is blocked
-		if (player->GetColumn() != enemy->GetColumn() && player->GetRow() != enemy->GetRow())
+		/*if (player->GetColumn() != enemy->GetColumn() && player->GetRow() != enemy->GetRow())
 		{
 			if (deltaColumn < 0 && world->IsTileValidForMovement(enemy->GetRow(), enemy->GetColumn() - 1))
 			{
@@ -90,7 +89,7 @@ void MainController::MoveEnemies(std::shared_ptr<Player> player)
 			{
 				command = new MoveCommand(0, 1);
 			}
-		}
+		}*/
 
 		if (command)
 		{

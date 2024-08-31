@@ -20,7 +20,7 @@ void InputManager::ProcessInput()
 {
     char input;
 
-    //SPECIFICALLY FOR WINDOWS
+    //SPECIFICALLY FOR WINDOWS OS
     // Check if a key has been pressed
     if (_kbhit())
     {

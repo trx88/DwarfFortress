@@ -18,9 +18,9 @@ bool World::InitializeFromJSON(const std::string& filePath)
 {
     try
     {
-        std::string test = "I:\\Playrix\\PlayrixDwarfFortress\\Project\\Data\\World.json";
-        /*std::ifstream file(filePath);*/
-        std::ifstream file(test);
+        //std::string test = "I:\\Playrix\\PlayrixDwarfFortress\\Project\\Data\\World.json";
+        std::ifstream file(filePath);
+        //std::ifstream file(test);
         if (!file.is_open()) {
             throw std::runtime_error("Could not open file: " + filePath);
         }
@@ -41,6 +41,47 @@ bool World::InitializeFromJSON(const std::string& filePath)
     {
         std::cerr << "Error: " << e.what() << std::endl;
         // Handle the exception as needed
+    }
+}
+
+void World::parseMap(const nlohmann::json& mapData)
+{
+    for (int y = 0; y < worldData->GetHeight(); ++y)
+    {
+        for (int x = 0; x < worldData->GetWidth(); ++x)
+        {
+            worldData->SetTileAt(y, x, mapData[y][x].get<std::string>()[0]);
+        }
+    }
+}
+
+void World::parseEntities(const nlohmann::json& entitiesData)
+{
+    // Parse player
+    auto playerData = entitiesData["player"];
+    auto player = std::make_shared<Entity>(worldData->GetEntityNextId(), playerData["type"], playerData["row"], playerData["column"]);
+    worldData->AddEntity(player);
+
+    // Parse enemies
+    for (const auto& enemyData : entitiesData["enemies"])
+    {
+        auto enemy = std::make_shared<Entity>(worldData->GetEntityNextId(), enemyData["type"], enemyData["row"], enemyData["column"]);
+        worldData->AddEntity(enemy);
+    }
+
+    // Parse obstacles
+    for (const auto& obstaclesData : entitiesData["obstacles"])
+    {
+        auto obstacles = std::make_shared<Entity>(worldData->GetEntityNextId(), obstaclesData["type"], obstaclesData["row"], obstaclesData["column"]);
+        worldData->AddEntity(obstacles);
+    }
+
+    // Parse chests
+    for (const auto& chestData : entitiesData["chests"])
+    {
+        auto chest = std::make_shared<Entity>(worldData->GetEntityNextId(), chestData["type"], chestData["row"], chestData["column"]);
+        worldData->AddEntity(chest);
+        // Optionally store chest contents if needed
     }
 }
 
@@ -110,45 +151,4 @@ std::shared_ptr<Player> World::GetPlayer()
 std::vector<std::shared_ptr<Entity>> World::GetEnemies()
 {
     return worldData->GetEnemies();
-}
-
-void World::parseMap(const nlohmann::json& mapData)
-{
-    for (int y = 0; y < worldData->GetHeight(); ++y)
-    {
-        for (int x = 0; x < worldData->GetWidth(); ++x)
-        {
-            worldData->SetTileAt(y, x, mapData[y][x].get<std::string>()[0]);
-        }
-    }
-}
-
-void World::parseEntities(const nlohmann::json& entitiesData)
-{
-    // Parse player
-    auto playerData = entitiesData["player"];
-    auto player = std::make_shared<Entity>(worldData->GetEntityNextId(), playerData["type"], playerData["row"], playerData["column"]);
-    worldData->AddEntity(player);
-
-    // Parse enemies
-    for (const auto& enemyData : entitiesData["enemies"])
-    {
-        auto enemy = std::make_shared<Entity>(worldData->GetEntityNextId(), enemyData["type"], enemyData["row"], enemyData["column"]);
-        worldData->AddEntity(enemy);
-    }
-
-    // Parse obstacles
-    for (const auto& obstaclesData : entitiesData["obstacles"])
-    {
-        auto obstacles = std::make_shared<Entity>(worldData->GetEntityNextId(), obstaclesData["type"], obstaclesData["row"], obstaclesData["column"]);
-        worldData->AddEntity(obstacles);
-    }
-
-    // Parse chests
-    for (const auto& chestData : entitiesData["chests"])
-    {
-        auto chest = std::make_shared<Entity>(worldData->GetEntityNextId(), chestData["type"], chestData["row"], chestData["column"]);
-        worldData->AddEntity(chest);
-        // Optionally store chest contents if needed
-    }
 }
