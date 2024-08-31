@@ -1,7 +1,5 @@
 #include "StatsSubView.h"
 #include "../Domains/Entities/Player.h"
-#include <sstream>
-#include <iostream>
 #include <string>
 
 StatsSubView::StatsSubView(int id, std::shared_ptr<class Player> player)

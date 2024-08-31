@@ -1,7 +1,5 @@
 #include "MapSubView.h"
-#include <sstream>
 #include "../Domains/Entities/Entity.h"
-#include <iostream>
 #include <string>
 
 MapSubView::MapSubView(int id, std::shared_ptr<World> world)
@@ -15,7 +13,6 @@ void MapSubView::UpdateSubView(WorldDataModel* worldDataModel)
     std::string output;
     output += "\033[H"; // Move cursor to top-left to avoid flickering
 
-    //TODO: UI MOCKUP. SPLIT INTO SUBVIEWS
     output += "---LEGEND--\n";
     output += "Player: P Enemy: E Chest: C Mountain: M Tree: T\n";
     output += "Move: WASD Potion: F Confirm/Cancel: Y/N Save: P Load: L Quit: Q\n";
@@ -44,6 +41,7 @@ void MapSubView::UpdateSubView(WorldDataModel* worldDataModel)
     output += "\n";
     onMapSubViewUpdated(id, output);
 
+    //TODO: UI MOCKUP. SPLIT INTO SUBVIEWS
     /*output << "-INVENTORY-" << "\n";
     output << "POTION: 1" << "\n";
     output << "SWORD" << "\n";
