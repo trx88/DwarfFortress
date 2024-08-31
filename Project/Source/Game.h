@@ -4,6 +4,8 @@
 class World;
 class Player;
 class MapSubView;
+class StatsSubView;
+class MainView;
 class InputManager;
 class MainController;
 
@@ -15,7 +17,7 @@ public:
 
 private:
     std::shared_ptr<World> world;
-    std::shared_ptr<MapSubView> view;
+    std::unique_ptr<MainView> mainView;
     std::unique_ptr<MainController> controller;
     std::unique_ptr<InputManager> inputManager;
 };

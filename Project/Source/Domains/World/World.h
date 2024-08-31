@@ -23,5 +23,6 @@ public:
 	
 	//TODO: Should probably move this to the Controller
 	boost::signals2::signal<void(WorldDataModel* worldDataModel)> onWorldDataUpdated;
+	void SignalWorldUpdate();
 };
 

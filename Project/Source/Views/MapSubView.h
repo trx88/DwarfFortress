@@ -1,12 +1,14 @@
 #pragma once
 #include "../DataModels/WorldDataModel.h"
 #include "../Domains/World/World.h"
+#include <boost/signals2/signal.hpp>
 
 class MapSubView
 {
 private:
-	void UpdateView(WorldDataModel* worldDataModel);
+	int id;
+	void UpdateSubView(WorldDataModel* worldDataModel);
 public:
-	MapSubView(std::shared_ptr<World> world);
-	void Render(std::stringstream& output);
+	MapSubView(int id, std::shared_ptr<World> world);
+	boost::signals2::signal<void(int id, std::string output)> onMapSubViewUpdated;
 };

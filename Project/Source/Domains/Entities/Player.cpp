@@ -9,3 +9,8 @@ Player::Player(int id, int type, int row, int column, int health, int armor, int
 Player::~Player()
 {
 }
+
+void Player::SignalPlayerStatsUpdate()
+{
+	onPlayerStatsUpdated(statsData.get());
+}

@@ -32,8 +32,6 @@ bool World::InitializeFromJSON(const std::string& filePath)
         parseMap(jsonData["map"]);
         parseEntities(jsonData["entities"]);
 
-        onWorldDataUpdated(worldData.get());
-
         return true;
     }
     catch (const std::exception& e) 
@@ -53,6 +51,8 @@ void World::parseMap(const nlohmann::json& mapData)
             worldData->SetTileAt(y, x, mapData[y][x].get<std::string>()[0]);
         }
     }
+
+    //onWorldDataUpdated(worldData.get());
 }
 
 void World::parseEntities(const nlohmann::json& entitiesData)
@@ -151,7 +151,8 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         entity->SetPosition(newRow, newColumn);
 
         // Emit signal indicating the entity has moved
-        onWorldDataUpdated(worldData.get());
+        //onWorldDataUpdated(worldData.get());
+        SignalWorldUpdate();
 
         return true;
     }
@@ -173,4 +174,9 @@ std::vector<std::shared_ptr<Enemy>> World::GetEnemies()
     }
 
     return enemies;
+}
+
+void World::SignalWorldUpdate()
+{
+    onWorldDataUpdated(worldData.get());
 }
