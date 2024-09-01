@@ -62,12 +62,13 @@ void World::parseEntities(const nlohmann::json& entitiesData)
     auto playerStatsData = playerData["stats"];
     auto player = std::make_shared<Player>(
         worldData->GetEntityNextId(), 
-        playerData["type"], 
+        static_cast<EntityType>(playerData["type"]),
         playerData["row"], 
         playerData["column"],
         playerStatsData["health"],
         playerStatsData["armor"],
         playerStatsData["damage"]);
+    player->AccessInventory()->StoreItem(std::make_shared<Item>("POTION", ItemType::Potion, 2, 1));
     worldData->AddEntity(player);
 
     // Parse enemies
@@ -76,7 +77,7 @@ void World::parseEntities(const nlohmann::json& entitiesData)
         auto enemyStatsData = enemyData["stats"];
         auto enemy = std::make_shared<Entity>(
             worldData->GetEntityNextId(), 
-            enemyData["type"], 
+            static_cast<EntityType>(enemyData["type"]),
             enemyData["row"], 
             enemyData["column"],
             enemyStatsData["health"],
@@ -88,14 +89,14 @@ void World::parseEntities(const nlohmann::json& entitiesData)
     // Parse obstacles
     for (const auto& obstaclesData : entitiesData["obstacles"])
     {
-        auto obstacles = std::make_shared<Entity>(worldData->GetEntityNextId(), obstaclesData["type"], obstaclesData["row"], obstaclesData["column"]);
+        auto obstacles = std::make_shared<Entity>(worldData->GetEntityNextId(), static_cast<EntityType>(obstaclesData["type"]), obstaclesData["row"], obstaclesData["column"]);
         worldData->AddEntity(obstacles);
     }
 
     // Parse chests
     for (const auto& chestData : entitiesData["chests"])
     {
-        auto chest = std::make_shared<Entity>(worldData->GetEntityNextId(), chestData["type"], chestData["row"], chestData["column"]);
+        auto chest = std::make_shared<Entity>(worldData->GetEntityNextId(), static_cast<EntityType>(chestData["type"]), chestData["row"], chestData["column"]);
         worldData->AddEntity(chest);
         // Optionally store chest contents if needed
     }
@@ -114,8 +115,8 @@ bool World::IsTileValidForMovement(int row, int column) const
     {
         // Check if the entity is something that should block movement
         //Enemy should not block movement (at least in my mind), instead battle should ensue. 
-        if (entity->GetType() == static_cast<int>(EntityType::Mountain) ||
-            entity->GetType() == static_cast<int>(EntityType::Tree))
+        if (entity->GetType() == EntityType::Mountain ||
+            entity->GetType() == EntityType::Tree)
         {
             return false; // Block movement
         }
@@ -134,7 +135,7 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
     if (IsTileValidForMovement(newRow, newColumn))
     {
         auto targetEntity = worldData->GetEntityAt(newRow, newColumn);
-        if (targetEntity && targetEntity->GetType() == static_cast<int>(EntityType::Chest)) 
+        if (targetEntity && targetEntity->GetType() == EntityType::Chest) 
         {
             //TODO: Pick up item. Enemy skips the chest.
             //auto player = std::static_pointer_cast<Player>(entity);
@@ -145,10 +146,10 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         }
 
         // Enemy leaves the chest in place
-        if (entity->GetType() == static_cast<int>(EntityType::Enemy))
+        if (entity->GetType() == EntityType::Enemy)
         {
             auto entityAtOldPosition = worldData->GetEntityAt(oldRow, oldColumn);
-            if (entityAtOldPosition && entityAtOldPosition->GetType() == static_cast<int>(EntityType::Chest))
+            if (entityAtOldPosition && entityAtOldPosition->GetType() == EntityType::Chest)
             {
                 worldData->SetTileAt(oldRow, oldColumn, targetEntity->GetTileSymbol());
             }

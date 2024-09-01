@@ -1,6 +1,7 @@
 #include "MainView.h"
 #include "MapSubView.h"
 #include "StatsSubView.h"
+#include "InventorySubView.h"
 #include <sstream>
 #include <iostream>
 #include <string>
@@ -9,9 +10,11 @@ MainView::MainView(std::shared_ptr<class World> world, std::shared_ptr<class Pla
 {
 	mapSubView = std::make_unique<MapSubView>(1, world);
 	statsSubView = std::make_unique<StatsSubView>(2, player);
+	inventorySubView = std::make_unique<InventorySubView>(3, player);
 
 	mapSubView->onMapSubViewUpdated.connect([this](int id, std::string output) {UpsertOutputBuffer(id, output); });
 	statsSubView->onStatsSubViewUpdated.connect([this](int id, std::string output) {UpsertOutputBuffer(id, output); });
+	inventorySubView->onInventorySubViewUpdated.connect([this](int id, std::string output) {UpsertOutputBuffer(id, output); });
 }
 
 MainView::~MainView()

@@ -1,9 +1,9 @@
 #include "Player.h"
 
-Player::Player(int id, int type, int row, int column, int health, int armor, int damage) 
+Player::Player(int id, EntityType type, int row, int column, int health, int armor, int damage)
 	: Entity(id, type, row, column, health, armor, damage)
 {
-	
+	inventory = std::make_unique<Inventory>();
 }
 
 Player::~Player()
@@ -31,4 +31,9 @@ void Player::UpdateDamage(int newDamage)
 void Player::SignalPlayerStatsUpdate()
 {
 	onPlayerStatsUpdated(statsData.get());
+}
+
+void Player::UsePotion()
+{
+	inventory->UseItem(inventory->GetItemsByType(ItemType::Potion).back(), statsData.get());
 }

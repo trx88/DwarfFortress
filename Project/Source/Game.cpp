@@ -15,6 +15,7 @@ Game::Game()
 
     world->SignalWorldUpdate();
     player->SignalPlayerStatsUpdate();
+    player->AccessInventory()->SignalInventoryUpdate();
 
     inputManager = std::make_unique<InputManager>(world);
     controller = std::make_unique<MainController>(world, inputManager.get());

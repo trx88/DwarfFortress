@@ -23,5 +23,6 @@ void StatsSubView::UpdateSubView(EntityStatsDataModel* entityStatsDataModel)
     output += std::to_string(entityStatsDataModel->GetDamage());
     output += "\n";
 
+    output += "\n";
     onStatsSubViewUpdated(id, output);
 }

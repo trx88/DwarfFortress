@@ -58,7 +58,7 @@ std::vector<std::shared_ptr<Entity>> WorldDataModel::GetEntitiesByType(EntityTyp
     std::vector<std::shared_ptr<Entity>> entitiesByType;
     for (const auto& entity : entities)
     {
-        if (entity.second->GetType() == static_cast<int>(entityType))
+        if (entity.second->GetType() == entityType)
         {
             entitiesByType.push_back(entity.second);
         }

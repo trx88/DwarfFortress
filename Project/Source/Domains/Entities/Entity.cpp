@@ -1,12 +1,12 @@
 #include "Entity.h"
 #include "../../DataModels/EntityStatsDataModel.h"
 
-Entity::Entity() : id(-1), type(-1), row(-1), column(-1)
+Entity::Entity() : id(-1), type(EntityType::Undefined), row(-1), column(-1)
 {
 	statsData = std::make_unique<EntityStatsDataModel>();
 }
 
-Entity::Entity(int id, int type, int row, int column)
+Entity::Entity(int id, EntityType type, int row, int column)
 {
 	this->id = id;
 	this->type = type;
@@ -15,7 +15,7 @@ Entity::Entity(int id, int type, int row, int column)
 	statsData = std::make_unique<EntityStatsDataModel>();
 }
 
-Entity::Entity(int id, int type, int row, int column, int health, int armor, int damage)
+Entity::Entity(int id, EntityType type, int row, int column, int health, int armor, int damage)
 {
 	this->id = id;
 	this->type = type;
@@ -43,7 +43,7 @@ int Entity::GetColumn() const
 	return column;
 }
 
-int Entity::GetType() const
+EntityType Entity::GetType() const
 {
 	return type;
 }
@@ -52,23 +52,23 @@ char Entity::GetTileSymbol() const
 {
 	switch (type)
 	{
-		case static_cast<int>(EntityType::Player):
+		case EntityType::Player:
 		{
 			return 'P';
 		}break;
-		case static_cast<int>(EntityType::Enemy):
+		case EntityType::Enemy:
 		{
 			return 'E';
 		}break;
-		case static_cast<int>(EntityType::Mountain):
+		case EntityType::Mountain:
 		{
 			return 'M';
 		}break;
-		case static_cast<int>(EntityType::Tree):
+		case EntityType::Tree:
 		{
 			return 'T';
 		}break;
-		case static_cast<int>(EntityType::Chest):
+		case EntityType::Chest:
 		{
 			return 'C';
 		}break;

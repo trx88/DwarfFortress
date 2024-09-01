@@ -57,8 +57,18 @@
         "row": 6,
         "stats": {
           "health": 6,
-          "armor": 1,
+          "armor": 0,
           "damage": 4
+        }
+      },
+      {
+        "type": 1,
+        "column": 9,
+        "row": 9,
+        "stats": {
+          "health": 8,
+          "armor": 1,
+          "damage": 5
         }
       }
     ],
@@ -174,25 +184,65 @@
         "type": 4,
         "column": 8,
         "row": 0,
-        "contents": [ "sword" ]
+        "contents": [
+          {
+            "name": "BREASTPLATE",
+            "type": 2,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
       },
       {
         "type": 4,
         "column": 4,
         "row": 3,
-        "contents": [ "potion" ]
+        "contents": [
+          {
+            "name": "LONGSWORD",
+            "type": 1,
+            "modifier": 3,
+            "stacks": 1
+          },
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 2
+          }
+        ]
       },
       {
         "type": 4,
         "column": 5,
         "row": 5,
-        "contents": [ "armor" ]
+        "contents": [
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          },
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
       },
       {
         "type": 4,
         "column": 0,
         "row": 7,
-        "contents": [ "shield" ]
+        "contents": [
+          {
+            "name": "SCALE MAIL",
+            "type": 2,
+            "modifier": 4,
+            "stacks": 1
+          }
+        ]
       }
     ]
   }
