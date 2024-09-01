@@ -94,7 +94,7 @@ void MainController::MoveEnemies(std::shared_ptr<Player> player)
 
 		if (command)
 		{
-			command->execute(world, enemy);
+			command->Execute(world, enemy);
 		}
 		delete command;
 	}

@@ -8,7 +8,7 @@ MoveCommand::MoveCommand(int deltaColumn, int deltaRow)
 	this->deltaRow = deltaRow;
 }
 
-bool MoveCommand::execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity)
+bool MoveCommand::Execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity)
 {
 	int newColumn = entity->GetColumn() + deltaColumn;
 	int newRow = entity->GetRow() + deltaRow;

@@ -25,6 +25,7 @@ void Inventory::RemoveItem(std::shared_ptr<Item> item)
 bool Inventory::UseItem(std::shared_ptr<Item> item, EntityStatsDataModel* statsData)
 {
 	//TODO: Write a chain of reponsibility for consuming/equiping items.
+	statsData->SetHealthPoints(statsData->GetHealthPoints() + item->GetModifier());
 	return true;
 }
 

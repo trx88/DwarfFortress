@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <string>
 
 enum class EntityType 
 {
@@ -30,6 +31,7 @@ public:
 	int GetColumn() const;
 	EntityType GetType() const;
 	char GetTileSymbol() const;
+	std::string GetTileSymbolForPrint();
 	void SetPosition(int newRow, int newColumn);
 };
 

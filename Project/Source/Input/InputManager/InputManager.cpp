@@ -2,6 +2,7 @@
 #include "../../Domains/World/World.h"
 #include "../../Domains/Entities/Player.h"
 #include "../Commands/MoveCommand.h"
+#include "../Commands/UseCommand.h"
 #include <conio.h> // Windows-specific
 #include <chrono>
 #include <thread>
@@ -46,18 +47,25 @@ void InputManager::ProcessInput()
             {
                 command = new MoveCommand(1, 0);
             } break;
+            case CommandKeys::INVENTORY_POTION:
+            {
+                command = new UseCommand();
+            } break;
             case CommandKeys::GAME_QUIT:
             {
-                //TODO: Handle this better
-                return; // Quit game loop
+                exit(0);
             } break;
         }
 
         if (command)
         {
-            if (command->execute(world, player))
+            if (command->Execute(world, player))
             {
-                onPlayerTurnEnded(player);
+                //HACK to end player's turn only when move command has been executed.
+                if (dynamic_cast<MoveCommand*>(command))
+                {
+                    onPlayerTurnEnded(player);
+                }
             }
             delete command;
 

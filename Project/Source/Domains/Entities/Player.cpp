@@ -33,7 +33,14 @@ void Player::SignalPlayerStatsUpdate()
 	onPlayerStatsUpdated(statsData.get());
 }
 
-void Player::UsePotion()
+bool Player::UsePotion()
 {
-	inventory->UseItem(inventory->GetItemsByType(ItemType::Potion).back(), statsData.get());
+	auto potion = inventory->GetItemsByType(ItemType::Potion).back();
+	if (potion && inventory->UseItem(potion, statsData.get()))
+	{
+		SignalPlayerStatsUpdate();
+		return true;
+	}
+
+	return false;
 }

@@ -11,7 +11,8 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
 {
     std::string output;
 
-    output += "---INVENTORY---\n";
+    output += "\x1B[92m---INVENTORY---\n";
+    output += "\x1B[37m"; //Print in white
     auto inventoryItems = inventoryDataModel->GetAllItems();
     for (const auto& item : inventoryItems)
     {
@@ -21,16 +22,6 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
         output += "\n";
     }
     output += "\n";
-
-    /*output += "HP: ";
-    output += std::to_string(entityStatsDataModel->GetHealthPoints());
-    output += "\n";
-    output += "AP: ";
-    output += std::to_string(entityStatsDataModel->GetArmorPoints());
-    output += "\n";
-    output += "DMG: ";
-    output += std::to_string(entityStatsDataModel->GetDamage());
-    output += "\n";*/
-
+    
     onInventorySubViewUpdated(id, output);
 }

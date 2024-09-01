@@ -79,6 +79,37 @@ char Entity::GetTileSymbol() const
 	}
 }
 
+std::string Entity::GetTileSymbolForPrint()
+{
+	switch (type)
+	{
+	case EntityType::Player:
+	{
+		return "\x1B[36mP";
+	}break;
+	case EntityType::Enemy:
+	{
+		return "\x1B[31mE";
+	}break;
+	case EntityType::Mountain:
+	{
+		return "\x1B[37mM";
+	}break;
+	case EntityType::Tree:
+	{
+		return "\x1B[32mT";
+	}break;
+	case EntityType::Chest:
+	{
+		return "\x1B[35mC";
+	}break;
+	default:
+	{
+		return "\x1B[31m?";
+	}break;
+	}
+}
+
 void Entity::SetPosition(int newRow, int newColumn)
 {
 	row = newRow;

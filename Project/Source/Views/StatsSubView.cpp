@@ -12,7 +12,8 @@ void StatsSubView::UpdateSubView(EntityStatsDataModel* entityStatsDataModel)
 {
     std::string output;
 
-    output += "---STATS---\n";
+    output += "\x1B[92m---STATS---\n";
+    output += "\x1B[37m"; //Print in white
     output += "HP: ";
     output += std::to_string(entityStatsDataModel->GetHealthPoints());
     output += "\n";

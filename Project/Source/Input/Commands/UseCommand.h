@@ -1,12 +1,10 @@
 #pragma once
 #include "Command.h"
 
-class MoveCommand : public Command
+class UseCommand : public Command
 {
-private:
-	int deltaColumn, deltaRow = 0;
 public:
-	MoveCommand(int deltaColumn, int deltaRow);
+	UseCommand();
 	bool Execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity) override;
 };
 

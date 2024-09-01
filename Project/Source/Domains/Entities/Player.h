@@ -21,6 +21,6 @@ public:
 	/*boost::signals2::signal<void(InventoryDataModel* inventoryDataModel)> onInventoryUpdated;
 	void SignalInventoryUpdate();*/
 
-	void UsePotion();
+	bool UsePotion();
 };
 

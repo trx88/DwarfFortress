@@ -19,6 +19,6 @@ public:
 class Command {
 public:
     virtual ~Command();
-    virtual bool execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity) = 0;
+    virtual bool Execute(std::shared_ptr<World> world, std::shared_ptr<Entity> entity) = 0;
 };
 
