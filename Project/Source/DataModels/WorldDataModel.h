@@ -28,6 +28,7 @@ public:
     void SetMapSize(int newWidth, int newHeight);
     void SetTileAt(int row, int column, char value);
     void AddEntity(std::shared_ptr<Entity> entity);
+    void RemoveEntity(std::shared_ptr<Entity> entity);
 #pragma endregion
 
 };

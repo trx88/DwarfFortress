@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Chest.h"
 
 Player::Player(int id, EntityType type, int row, int column, int health, int armor, int damage)
 	: Entity(id, type, row, column, health, armor, damage)
@@ -43,4 +44,12 @@ bool Player::UsePotion()
 	}
 
 	return false;
+}
+
+void Player::OpenChestAndStoreItems(std::shared_ptr<class Chest> chest)
+{
+	for (const auto& item : chest->GetChestContents())
+	{
+		inventory->StoreItem(item);
+	}
 }

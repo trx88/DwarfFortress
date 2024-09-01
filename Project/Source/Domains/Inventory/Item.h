@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 
 enum class ItemType {
     Potion = 0,
@@ -21,4 +22,6 @@ public:
     ItemType GetType() const;
     int GetModifier() const;
     int GetStacks() const;
+    void SetStacks(int updatedStack);
+    friend bool operator==(const std::shared_ptr<Item>& first, const std::shared_ptr<Item>& second);
 };

@@ -22,5 +22,6 @@ public:
 	void SignalInventoryUpdate();*/
 
 	bool UsePotion();
+	void OpenChestAndStoreItems(std::shared_ptr<class Chest> chest);
 };
 

@@ -83,3 +83,8 @@ void WorldDataModel::AddEntity(std::shared_ptr<Entity> entity)
 {
     entities[entity->GetId()] = entity;
 }
+
+void WorldDataModel::RemoveEntity(std::shared_ptr<Entity> entity)
+{
+    entities.erase(entity->GetId());
+}

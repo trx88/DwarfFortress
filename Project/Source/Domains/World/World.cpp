@@ -5,6 +5,7 @@
 #include "../../Domains/Entities/Player.h"
 #include "../../Domains/Entities/Enemy.h"
 #include <iostream>
+#include "../Entities/Chest.h"
 
 World::World()
 {
@@ -68,6 +69,7 @@ void World::parseEntities(const nlohmann::json& entitiesData)
         playerStatsData["health"],
         playerStatsData["armor"],
         playerStatsData["damage"]);
+    //Default inventory
     player->AccessInventory()->StoreItem(std::make_shared<Item>("POTION", ItemType::Potion, 2, 1));
     worldData->AddEntity(player);
 
@@ -75,7 +77,7 @@ void World::parseEntities(const nlohmann::json& entitiesData)
     for (const auto& enemyData : entitiesData["enemies"])
     {
         auto enemyStatsData = enemyData["stats"];
-        auto enemy = std::make_shared<Entity>(
+        auto enemy = std::make_shared<Enemy>(
             worldData->GetEntityNextId(), 
             static_cast<EntityType>(enemyData["type"]),
             enemyData["row"], 
@@ -96,9 +98,21 @@ void World::parseEntities(const nlohmann::json& entitiesData)
     // Parse chests
     for (const auto& chestData : entitiesData["chests"])
     {
-        auto chest = std::make_shared<Entity>(worldData->GetEntityNextId(), static_cast<EntityType>(chestData["type"]), chestData["row"], chestData["column"]);
+        auto chestContents = chestData["contents"];
+        
+        std::vector<std::shared_ptr<Item>> items;
+        for (const auto& content : chestContents)
+        {
+            items.push_back(std::make_shared<Item>(
+                content["name"],
+                content["type"],
+                content["modifier"],
+                content["stacks"]
+            ));
+        }
+
+        auto chest = std::make_shared<Chest>(worldData->GetEntityNextId(), static_cast<EntityType>(chestData["type"]), chestData["row"], chestData["column"], items);
         worldData->AddEntity(chest);
-        // Optionally store chest contents if needed
     }
 }
 
@@ -135,14 +149,14 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
     if (IsTileValidForMovement(newRow, newColumn))
     {
         auto targetEntity = worldData->GetEntityAt(newRow, newColumn);
-        if (targetEntity && targetEntity->GetType() == EntityType::Chest) 
+        if (targetEntity && targetEntity->GetType() == EntityType::Chest && entity->GetType() == EntityType::Player)
         {
             //TODO: Pick up item. Enemy skips the chest.
-            //auto player = std::static_pointer_cast<Player>(entity);
-            //if (player) {
-            //    player->pickUpItemsFrom(targetEntity);
-            //    //removeEntity(targetEntity); // Remove chest after looting
-            //}
+            auto player = std::static_pointer_cast<Player>(entity);
+            if (player) {
+                player->OpenChestAndStoreItems(std::static_pointer_cast<Chest>(targetEntity));
+                worldData->RemoveEntity(targetEntity);
+            }
         }
 
         // Enemy leaves the chest in place
@@ -169,7 +183,6 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         entity->SetPosition(newRow, newColumn);
 
         // Emit signal indicating the entity has moved
-        //onWorldDataUpdated(worldData.get());
         SignalWorldUpdate();
 
         return true;

@@ -11,7 +11,7 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
 {
     std::string output;
 
-    output += "\x1B[92m---INVENTORY---\n";
+    output += "\x1B[92m-INVENTORY-\n";
     output += "\x1B[37m"; //Print in white
     auto inventoryItems = inventoryDataModel->GetAllItems();
     for (const auto& item : inventoryItems)

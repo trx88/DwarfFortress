@@ -31,3 +31,16 @@ int Item::GetStacks() const
 {
 	return stacks;
 }
+
+void Item::SetStacks(int updatedStack)
+{
+	this->stacks = updatedStack;
+}
+
+bool operator==(const std::shared_ptr<Item>& first, const std::shared_ptr<Item>& second)
+{
+	return 
+		first->GetName().compare(second->GetName()) == 0 &&
+		first->GetType() == second->GetType() &&
+		first->GetModifier() == second->GetModifier();
+}

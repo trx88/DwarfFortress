@@ -30,7 +30,22 @@ std::vector<std::shared_ptr<Item>> InventoryDataModel::GetItemsByType(ItemType t
 
 void InventoryDataModel::AddItem(std::shared_ptr<Item> item)
 {
-	items.push_back(item);
+	bool alreadyInInventory = false;
+
+	for (const auto& storedItem : items)
+	{
+		if (storedItem == item)
+		{
+			storedItem->SetStacks(storedItem->GetStacks() + item->GetStacks());
+			alreadyInInventory = true;
+			break;
+		}
+	}
+
+	if (!alreadyInInventory)
+	{
+		items.push_back(item);
+	}
 }
 
 void InventoryDataModel::DeleteItem(std::shared_ptr<Item> item)
