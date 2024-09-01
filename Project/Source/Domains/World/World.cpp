@@ -136,7 +136,7 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         auto targetEntity = worldData->GetEntityAt(newRow, newColumn);
         if (targetEntity && targetEntity->GetType() == static_cast<int>(EntityType::Chest)) 
         {
-            //TODO: Pick up item
+            //TODO: Pick up item. Enemy skips the chest.
             //auto player = std::static_pointer_cast<Player>(entity);
             //if (player) {
             //    player->pickUpItemsFrom(targetEntity);
@@ -144,8 +144,25 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
             //}
         }
 
-        // Clear the old position by setting it to an empty tile
-        worldData->SetTileAt(oldRow, oldColumn, '.');
+        // Enemy leaves the chest in place
+        if (entity->GetType() == static_cast<int>(EntityType::Enemy))
+        {
+            auto entityAtOldPosition = worldData->GetEntityAt(oldRow, oldColumn);
+            if (entityAtOldPosition && entityAtOldPosition->GetType() == static_cast<int>(EntityType::Chest))
+            {
+                worldData->SetTileAt(oldRow, oldColumn, targetEntity->GetTileSymbol());
+            }
+            else
+            {
+                // Clear the old position by setting it to an empty tile
+                worldData->SetTileAt(oldRow, oldColumn, '.');
+            }
+        }
+        else
+        {
+            // Clear the old position by setting it to an empty tile for any other case
+            worldData->SetTileAt(oldRow, oldColumn, '.');
+        }
 
         // Update entity position
         entity->SetPosition(newRow, newColumn);

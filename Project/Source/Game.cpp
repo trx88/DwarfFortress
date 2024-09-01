@@ -28,6 +28,7 @@ void Game::Run()
 {
     while (true)
     {
-        inputManager->ProcessInput();   
+        inputManager->ProcessInput();
     }
 }
+ 
