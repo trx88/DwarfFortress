@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <string>
 
 class World;
 class Player;
@@ -20,4 +21,6 @@ private:
     std::unique_ptr<MainView> mainView;
     std::unique_ptr<MainController> controller;
     std::unique_ptr<InputManager> inputManager;
+    void LoadGame(std::string jsonFile);
+    void ReloadGame();
 };

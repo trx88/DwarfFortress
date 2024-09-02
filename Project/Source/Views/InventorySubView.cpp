@@ -11,7 +11,7 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
 {
     std::string output;
     std::string equippedText = " Equipped";
-    //HACK: Adding spaces to avoid clearing the console since it flickers.
+    //Adding spaces to avoid clearing the console since it flickers.
     std::string equippedTest = "         ";
 
     output += "\x1B[92m-INVENTORY-\n";

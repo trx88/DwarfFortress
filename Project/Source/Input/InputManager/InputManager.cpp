@@ -84,6 +84,10 @@ void InputManager::ProcessInput()
                 {
                     onPlayerTurnEnded(player);
                 }
+                if (dynamic_cast<LoadCommand*>(command))
+                {
+                    onReloadGame();
+                }
             }
             delete command;
 

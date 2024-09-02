@@ -3,7 +3,6 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include "../World/World.h"
-//#include "../../Domains/Entities/Entity.h"
 #include "../../Domains/Entities/Player.h"
 #include "../../Domains/Entities/Enemy.h"
 #include "../../Domains/Entities/Chest.h"
@@ -78,6 +77,7 @@ bool SaveLoadService::SaveToJSON(std::shared_ptr<class World> world, std::shared
     }
 }
 
+[[depraceted]]
 bool SaveLoadService::LoadFromJSON(std::shared_ptr<class World> world, std::shared_ptr<class Player> player)
 {
     if (world->InitializeFromJSON("save.json"))

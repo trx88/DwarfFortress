@@ -16,5 +16,6 @@ public:
 	void ProcessInput();
 
 	boost::signals2::signal<void(std::shared_ptr<Player>)> onPlayerTurnEnded;
+	boost::signals2::signal<void()> onReloadGame;
 };
 

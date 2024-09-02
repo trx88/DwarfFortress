@@ -7,18 +7,7 @@
 
 Game::Game()
 {
-    world = std::make_shared<World>();
-    world->InitializeFromJSON("Data\\World.json");
-    
-    auto player = world->GetPlayer();
-    mainView = std::make_unique<MainView>(world, player);
-
-    world->SignalWorldUpdate();
-    player->SignalPlayerStatsUpdate();
-    player->AccessInventory()->SignalInventoryUpdate();
-
-    inputManager = std::make_unique<InputManager>(world);
-    controller = std::make_unique<MainController>(world, inputManager.get());
+    LoadGame("Data\\World.json");
 }
 
 Game::~Game()
@@ -31,4 +20,26 @@ void Game::Run()
     {
         inputManager->ProcessInput();
     }
+}
+
+void Game::LoadGame(std::string jsonFile)
+{
+    world = std::make_shared<World>();
+    world->InitializeFromJSON(jsonFile);
+
+    auto player = world->GetPlayer();
+    mainView = std::make_unique<MainView>(world, player);
+
+    world->SignalWorldUpdate();
+    player->SignalPlayerStatsUpdate();
+    player->AccessInventory()->SignalInventoryUpdate();
+
+    inputManager = std::make_unique<InputManager>(world);
+    controller = std::make_unique<MainController>(world, inputManager.get());
+    inputManager->onReloadGame.connect([this]() { ReloadGame(); });
+}
+
+void Game::ReloadGame()
+{
+    LoadGame("save.json");
 }
