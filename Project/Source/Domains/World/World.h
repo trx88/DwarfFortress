@@ -15,11 +15,14 @@ private:
 public:
 	World();
 	~World();
+	nlohmann::json MapToJSON();
 	bool InitializeFromJSON(const std::string& filePath);
 	bool IsTileValidForMovement(int row, int column) const;
 	bool MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn);
 	std::shared_ptr<class Player> GetPlayer();
 	std::vector<std::shared_ptr<class Enemy>> GetEnemies();
+	std::vector<std::shared_ptr<class Chest>> GetChests();
+	std::vector<std::shared_ptr<class Entity>> GetObstacles();
 	
 	boost::signals2::signal<void(WorldDataModel* worldDataModel)> onWorldDataUpdated;
 	void SignalWorldUpdate();

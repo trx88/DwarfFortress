@@ -3,6 +3,8 @@
 #include "../../Domains/Entities/Player.h"
 #include "../Commands/MoveCommand.h"
 #include "../Commands/UseCommand.h"
+#include "../Commands/SaveCommand.h"
+#include "../Commands/LoadCommand.h"
 #include <conio.h> // Windows-specific
 #include <chrono>
 #include <thread>
@@ -58,6 +60,14 @@ void InputManager::ProcessInput()
             case CommandKeys::INVENTORY_ARMOR:
             {
                 command = new UseCommand(ItemType::Armor);
+            } break;
+            case CommandKeys::GAME_SAVE:
+            {
+                command = new SaveCommand();
+            } break;
+            case CommandKeys::GAME_LOAD:
+            {
+                command = new LoadCommand();
             } break;
             case CommandKeys::GAME_QUIT:
             {

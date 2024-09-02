@@ -46,6 +46,11 @@ std::vector<std::shared_ptr<Item>> Inventory::GetItemsByType(ItemType type)
 	return inventoryData->GetItemsByType(type);
 }
 
+std::vector<std::shared_ptr<Item>> Inventory::GetItems()
+{
+	return inventoryData->GetAllItems();
+}
+
 void Inventory::SignalInventoryUpdate()
 {
 	onInventoryUpdated(inventoryData.get());

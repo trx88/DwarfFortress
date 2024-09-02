@@ -1,0 +1,357 @@
+{
+    "entities": {
+        "chests": [
+            {
+                "column": 8,
+                "contents": [
+                    {
+                        "modifier": 2,
+                        "name": "BREASTPLATE",
+                        "stacks": 1,
+                        "type": 2
+                    }
+                ],
+                "row": 0,
+                "type": 4
+            },
+            {
+                "column": 4,
+                "contents": [
+                    {
+                        "modifier": 4,
+                        "name": "LONGSWORD",
+                        "stacks": 1,
+                        "type": 1
+                    },
+                    {
+                        "modifier": 2,
+                        "name": "POTION",
+                        "stacks": 2,
+                        "type": 0
+                    }
+                ],
+                "row": 3,
+                "type": 4
+            },
+            {
+                "column": 5,
+                "contents": [
+                    {
+                        "modifier": 2,
+                        "name": "POTION",
+                        "stacks": 1,
+                        "type": 0
+                    },
+                    {
+                        "modifier": 2,
+                        "name": "POTION",
+                        "stacks": 1,
+                        "type": 0
+                    }
+                ],
+                "row": 5,
+                "type": 4
+            },
+            {
+                "column": 0,
+                "contents": [
+                    {
+                        "modifier": 4,
+                        "name": "SCALE MAIL",
+                        "stacks": 1,
+                        "type": 2
+                    }
+                ],
+                "row": 7,
+                "type": 4
+            }
+        ],
+        "enemies": [
+            {
+                "column": 3,
+                "row": 5,
+                "stats": {
+                    "armor": 0,
+                    "damage": 2,
+                    "health": 2
+                },
+                "type": 1
+            },
+            {
+                "column": 8,
+                "row": 6,
+                "stats": {
+                    "armor": 0,
+                    "damage": 4,
+                    "health": 6
+                },
+                "type": 1
+            },
+            {
+                "column": 9,
+                "row": 9,
+                "stats": {
+                    "armor": 1,
+                    "damage": 5,
+                    "health": 8
+                },
+                "type": 1
+            }
+        ],
+        "obstacles": [
+            {
+                "column": 1,
+                "row": 0,
+                "type": 2
+            },
+            {
+                "column": 9,
+                "row": 0,
+                "type": 2
+            },
+            {
+                "column": 2,
+                "row": 2,
+                "type": 2
+            },
+            {
+                "column": 6,
+                "row": 2,
+                "type": 2
+            },
+            {
+                "column": 0,
+                "row": 4,
+                "type": 2
+            },
+            {
+                "column": 7,
+                "row": 4,
+                "type": 2
+            },
+            {
+                "column": 9,
+                "row": 5,
+                "type": 2
+            },
+            {
+                "column": 2,
+                "row": 7,
+                "type": 2
+            },
+            {
+                "column": 7,
+                "row": 7,
+                "type": 2
+            },
+            {
+                "column": 3,
+                "row": 9,
+                "type": 2
+            },
+            {
+                "column": 5,
+                "row": 0,
+                "type": 3
+            },
+            {
+                "column": 3,
+                "row": 1,
+                "type": 3
+            },
+            {
+                "column": 7,
+                "row": 1,
+                "type": 3
+            },
+            {
+                "column": 0,
+                "row": 2,
+                "type": 3
+            },
+            {
+                "column": 9,
+                "row": 3,
+                "type": 3
+            },
+            {
+                "column": 2,
+                "row": 4,
+                "type": 3
+            },
+            {
+                "column": 1,
+                "row": 5,
+                "type": 3
+            },
+            {
+                "column": 6,
+                "row": 6,
+                "type": 3
+            },
+            {
+                "column": 1,
+                "row": 8,
+                "type": 3
+            },
+            {
+                "column": 3,
+                "row": 8,
+                "type": 3
+            },
+            {
+                "column": 7,
+                "row": 8,
+                "type": 3
+            }
+        ],
+        "player": {
+            "column": 0,
+            "inventory": [
+                {
+                    "modifier": 2,
+                    "name": "POTION",
+                    "stacks": 1,
+                    "type": 0
+                },
+                {
+                    "modifier": 2,
+                    "name": "UNARMED",
+                    "stacks": 1,
+                    "type": 1
+                }
+            ],
+            "row": 0,
+            "stats": {
+                "armor": 0,
+                "damage": 2,
+                "health": 10
+            },
+            "type": 0
+        }
+    },
+    "height": 10,
+    "map": [
+        [
+            "P",
+            "M",
+            ".",
+            ".",
+            ".",
+            "T",
+            ".",
+            ".",
+            "C",
+            "M"
+        ],
+        [
+            ".",
+            ".",
+            ".",
+            "T",
+            ".",
+            ".",
+            ".",
+            "T",
+            ".",
+            "."
+        ],
+        [
+            "T",
+            ".",
+            "M",
+            ".",
+            ".",
+            ".",
+            "M",
+            ".",
+            ".",
+            "."
+        ],
+        [
+            ".",
+            ".",
+            ".",
+            ".",
+            "C",
+            ".",
+            ".",
+            ".",
+            ".",
+            "T"
+        ],
+        [
+            "M",
+            ".",
+            "T",
+            ".",
+            ".",
+            ".",
+            ".",
+            "M",
+            ".",
+            "."
+        ],
+        [
+            ".",
+            "T",
+            ".",
+            "E",
+            ".",
+            "C",
+            ".",
+            ".",
+            ".",
+            "M"
+        ],
+        [
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            "T",
+            ".",
+            "E",
+            "."
+        ],
+        [
+            "C",
+            ".",
+            "M",
+            ".",
+            ".",
+            ".",
+            ".",
+            "M",
+            ".",
+            "."
+        ],
+        [
+            ".",
+            "T",
+            ".",
+            "T",
+            ".",
+            ".",
+            ".",
+            "T",
+            ".",
+            "."
+        ],
+        [
+            ".",
+            ".",
+            ".",
+            "M",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            "E"
+        ]
+    ],
+    "width": 10
+}

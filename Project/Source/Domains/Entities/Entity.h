@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <nlohmann/json.hpp>
 
 enum class EntityType 
 {
@@ -33,5 +34,6 @@ public:
 	char GetTileSymbol() const;
 	std::string GetTileSymbolForPrint();
 	void SetPosition(int newRow, int newColumn);
+	nlohmann::json EntityToJSON();
 };
 

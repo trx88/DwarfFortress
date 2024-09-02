@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "../../DataModels/EntityStatsDataModel.h"
 #include <boost/signals2/signal.hpp>
+#include <nlohmann/json.hpp>
 #include "../Inventory/Inventory.h"
 
 class Player : public Entity
@@ -23,5 +24,7 @@ public:
 	bool SwapWeapons();
 	bool SwapArmor();
 	void OpenChestAndStoreItems(std::shared_ptr<class Chest> chest);
+
+	nlohmann::json PlayerToJSON();
 };
 

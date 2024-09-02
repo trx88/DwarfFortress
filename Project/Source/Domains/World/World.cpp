@@ -16,6 +16,33 @@ World::~World()
 {
 }
 
+nlohmann::json World::MapToJSON()
+{
+    nlohmann::json jsonData;
+    jsonData["width"] = worldData->GetWidth();
+    jsonData["height"] = worldData->GetHeight();
+
+    for (int row = 0; row < worldData->GetHeight(); row++)
+    {
+        nlohmann::json jRow = nlohmann::json::array();
+        for (int column = 0; column < worldData->GetWidth(); column++)
+        {
+            auto entity = worldData->GetEntityAt(row, column);
+            if (entity)
+            {
+                jRow.push_back(std::string(1, entity->GetTileSymbol())); // Store as a single-character string
+            }
+            else
+            {
+                jRow.push_back(std::string(1, '.')); // Store as a single-character string
+            }
+        }
+        jsonData["map"].push_back(jRow);
+    }
+
+    return jsonData;
+}
+
 bool World::InitializeFromJSON(const std::string& filePath)
 {
     try
@@ -29,6 +56,7 @@ bool World::InitializeFromJSON(const std::string& filePath)
         //std::cout << file;
         file >> jsonData;
 
+        worldData->ClearEntities();
         worldData->SetMapSize(jsonData["width"], jsonData["height"]);
         parseMap(jsonData["map"]);
         parseEntities(jsonData["entities"]);
@@ -214,6 +242,32 @@ std::vector<std::shared_ptr<Enemy>> World::GetEnemies()
     }
 
     return enemies;
+}
+
+std::vector<std::shared_ptr<class Chest>> World::GetChests()
+{
+    std::vector<std::shared_ptr<Chest>> chests;
+    for (const auto& chest : worldData->GetEntitiesByType(EntityType::Chest))
+    {
+        chests.push_back(std::static_pointer_cast<Chest>(chest));
+    }
+
+    return chests;
+}
+
+std::vector<std::shared_ptr<class Entity>> World::GetObstacles()
+{
+    std::vector<std::shared_ptr<Entity>> obstacles;
+    for (const auto& mountain : worldData->GetEntitiesByType(EntityType::Mountain))
+    {
+        obstacles.push_back(mountain);
+    }
+    for (const auto& tree : worldData->GetEntitiesByType(EntityType::Tree))
+    {
+        obstacles.push_back(tree);
+    }
+
+    return obstacles;
 }
 
 void World::SignalWorldUpdate()

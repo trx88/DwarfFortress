@@ -14,8 +14,6 @@ public:
     static const char GAME_QUIT = 'q';
     static const char GAME_SAVE = 'p';
     static const char GAME_LOAD = 'l';
-    static const char GAME_CONFIRM = 'y';
-    static const char GAME_CANCEL = 'n';
 };
 
 class Command {

@@ -88,3 +88,9 @@ void WorldDataModel::RemoveEntity(std::shared_ptr<Entity> entity)
 {
     entities.erase(entity->GetId());
 }
+
+void WorldDataModel::ClearEntities()
+{
+    map.clear();
+    entities.clear();
+}

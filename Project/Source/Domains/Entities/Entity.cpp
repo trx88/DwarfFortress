@@ -115,3 +115,15 @@ void Entity::SetPosition(int newRow, int newColumn)
 	row = newRow;
 	column = newColumn;
 }
+
+nlohmann::json Entity::EntityToJSON()
+{
+	nlohmann::json jsonData;
+
+	nlohmann::json jsonEntityObject = nlohmann::json::object();
+	jsonEntityObject["type"] = static_cast<int>(GetType());
+	jsonEntityObject["column"] = static_cast<int>(GetColumn());
+	jsonEntityObject["row"] = static_cast<int>(GetRow());
+
+	return jsonEntityObject;
+}

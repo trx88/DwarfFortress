@@ -146,3 +146,35 @@ void Player::OpenChestAndStoreItems(std::shared_ptr<class Chest> chest)
 		inventory->StoreItem(item);
 	}
 }
+
+nlohmann::json Player::PlayerToJSON()
+{
+	nlohmann::json jsonData;
+
+	nlohmann::json jsonPlayerObject = nlohmann::json::object();
+	jsonPlayerObject["type"] = static_cast<int>(GetType());
+	jsonPlayerObject["column"] = static_cast<int>(GetColumn());
+	jsonPlayerObject["row"] = static_cast<int>(GetRow());
+	
+	nlohmann::json jsonStatsObject = nlohmann::json::object();
+	jsonStatsObject["health"] = static_cast<int>(statsData->GetHealthPoints());
+	jsonStatsObject["armor"] = static_cast<int>(statsData->GetArmorPoints());
+	jsonStatsObject["damage"] = static_cast<int>(statsData->GetDamage());
+	jsonPlayerObject["stats"] = jsonStatsObject;
+
+	nlohmann::json jsonInventoryObject = nlohmann::json::array();
+	for (const auto& item : inventory->GetItems())
+	{
+		nlohmann::json jsonItemObject = nlohmann::json::object();
+		jsonItemObject["name"] = item->GetName();
+		jsonItemObject["type"] = static_cast<int>(item->GetType());
+		jsonItemObject["modifier"] = item->GetModifier();
+		jsonItemObject["stacks"] = item->GetStacks();
+
+		jsonInventoryObject.push_back(jsonItemObject);
+	}
+
+	jsonPlayerObject["inventory"] = jsonInventoryObject;
+
+	return jsonData["player"] = jsonPlayerObject;
+}
