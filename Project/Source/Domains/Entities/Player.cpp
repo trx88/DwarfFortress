@@ -67,6 +67,7 @@ bool Player::SwapWeapons()
 				}
 				else
 				{
+					//Cycle to first, if last one is equipped
 					weapons[i]->SetEquipped(false);
 					weaponToEquip = weapons[0];
 					break;
@@ -112,6 +113,7 @@ bool Player::SwapArmor()
 				}
 				else
 				{
+					//Cycle to first, if last one is equipped
 					armors[i]->SetEquipped(false);
 					armorToEquip = armors[0];
 					break;

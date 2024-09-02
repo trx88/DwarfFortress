@@ -59,6 +59,8 @@ void World::parseEntities(const nlohmann::json& entitiesData)
     // Parse player
     auto playerData = entitiesData["player"];
     auto playerStatsData = playerData["stats"];
+    auto playerInventoryData = playerData["inventory"];
+
     auto player = std::make_shared<Player>(
         worldData->GetEntityNextId(), 
         static_cast<EntityType>(playerData["type"]),
@@ -67,10 +69,18 @@ void World::parseEntities(const nlohmann::json& entitiesData)
         playerStatsData["health"],
         playerStatsData["armor"],
         playerStatsData["damage"]);
+    
     //Default inventory
-    player->AccessInventory()->StoreItem(std::make_shared<Item>("POTION", ItemType::Potion, 2, 1));
-    player->AccessInventory()->StoreItem(std::make_shared<Item>("UNARMED", ItemType::Weapon, 2, 1));
-    player->SwapWeapons();
+    for (auto const& items : playerInventoryData)
+    {
+        player->AccessInventory()->StoreItem(std::make_shared<Item>(
+            items["name"],
+            items["type"],
+            items["modifier"],
+            items["stacks"]));
+    }
+    player->SwapWeapons();//Equip unarmed
+
     worldData->AddEntity(player);
 
     // Parse enemies
