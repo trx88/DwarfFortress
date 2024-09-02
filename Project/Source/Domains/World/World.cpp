@@ -52,8 +52,6 @@ void World::parseMap(const nlohmann::json& mapData)
             worldData->SetTileAt(y, x, mapData[y][x].get<std::string>()[0]);
         }
     }
-
-    //onWorldDataUpdated(worldData.get());
 }
 
 void World::parseEntities(const nlohmann::json& entitiesData)
@@ -71,6 +69,8 @@ void World::parseEntities(const nlohmann::json& entitiesData)
         playerStatsData["damage"]);
     //Default inventory
     player->AccessInventory()->StoreItem(std::make_shared<Item>("POTION", ItemType::Potion, 2, 1));
+    player->AccessInventory()->StoreItem(std::make_shared<Item>("UNARMED", ItemType::Weapon, 2, 1));
+    player->SwapWeapons();
     worldData->AddEntity(player);
 
     // Parse enemies
@@ -151,7 +151,6 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
         auto targetEntity = worldData->GetEntityAt(newRow, newColumn);
         if (targetEntity && targetEntity->GetType() == EntityType::Chest && entity->GetType() == EntityType::Player)
         {
-            //TODO: Pick up item. Enemy skips the chest.
             auto player = std::static_pointer_cast<Player>(entity);
             if (player) {
                 player->OpenChestAndStoreItems(std::static_pointer_cast<Chest>(targetEntity));

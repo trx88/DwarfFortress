@@ -49,7 +49,15 @@ void InputManager::ProcessInput()
             } break;
             case CommandKeys::INVENTORY_POTION:
             {
-                command = new UseCommand();
+                command = new UseCommand(ItemType::Potion);
+            } break;
+            case CommandKeys::INVENTORY_WEAPON:
+            {
+                command = new UseCommand(ItemType::Weapon);
+            } break;
+            case CommandKeys::INVENTORY_ARMOR:
+            {
+                command = new UseCommand(ItemType::Armor);
             } break;
             case CommandKeys::GAME_QUIT:
             {

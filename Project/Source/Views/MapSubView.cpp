@@ -14,10 +14,9 @@ void MapSubView::UpdateSubView(WorldDataModel* worldDataModel)
     output += "\033[H"; // Move cursor to top-left to avoid flickering
 
     output += "\x1B[33m---LEGEND--\n";
-    //output += "\x1B[37m"; //Print in white
     output += "\x1B[37mPlayer:\x1B[36mP \x1B[37mEnemy:\x1B[31mE \x1B[37mChest:\x1B[35mC \x1B[37mMountain:\x1B[37mM \x1B[37mTree:\x1B[32mT\n";
     output += "\x1B[92m--CONTROLS-\n";
-    output += "\x1B[37mMove:\x1B[92mWASD \x1B[37mPotion:\x1B[92mF \x1B[37mConfirm/Cancel:\x1B[92mY/N \x1B[37mSave:\x1B[92mP \x1B[37mLoad:\x1B[92mL \x1B[37mQuit:\x1B[92mQ\n";
+    output += "\x1B[37mMove:\x1B[92mWASD \x1B[37mPotion:\x1B[92mF \x1B[37mSwap weapon:\x1B[92mE \x1B[37mSwap armor:\x1B[92mR \x1B[37mSave:\x1B[92mP \x1B[37mLoad:\x1B[92mL \x1B[37mQuit:\x1B[92mQ\n";
     output += "\n";
 
     output += "----MAP----\n";

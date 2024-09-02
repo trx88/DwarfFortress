@@ -9,6 +9,8 @@ public:
     static const char MOVE_LEFT = 'a';
     static const char MOVE_RIGHT = 'd';
     static const char INVENTORY_POTION = 'f';
+    static const char INVENTORY_WEAPON = 'e';
+    static const char INVENTORY_ARMOR = 'r';
     static const char GAME_QUIT = 'q';
     static const char GAME_SAVE = 'p';
     static const char GAME_LOAD = 'l';

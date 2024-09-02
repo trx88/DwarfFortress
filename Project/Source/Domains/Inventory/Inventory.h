@@ -8,6 +8,7 @@ class Inventory
 {
 private:
 	std::unique_ptr<InventoryDataModel> inventoryData;
+	std::unique_ptr<class ItemHandlerService> itemHandlerService;
 public:
 	Inventory();
 	~Inventory();

@@ -25,4 +25,3 @@ public:
 	boost::signals2::signal<void(WorldDataModel* worldDataModel)> onWorldDataUpdated;
 	void SignalWorldUpdate();
 };
-

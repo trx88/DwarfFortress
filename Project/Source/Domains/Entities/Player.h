@@ -18,10 +18,10 @@ public:
 
 	boost::signals2::signal<void(EntityStatsDataModel* entityStatsDataModel)> onPlayerStatsUpdated;
 	void SignalPlayerStatsUpdate();
-	/*boost::signals2::signal<void(InventoryDataModel* inventoryDataModel)> onInventoryUpdated;
-	void SignalInventoryUpdate();*/
 
 	bool UsePotion();
+	bool SwapWeapons();
+	bool SwapArmor();
 	void OpenChestAndStoreItems(std::shared_ptr<class Chest> chest);
 };
 
