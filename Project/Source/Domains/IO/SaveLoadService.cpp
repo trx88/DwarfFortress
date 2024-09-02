@@ -77,7 +77,7 @@ bool SaveLoadService::SaveToJSON(std::shared_ptr<class World> world, std::shared
     }
 }
 
-[[depraceted]]
+[[deprecated("Not used, since there's LoadGame from Game can be used for this.")]]
 bool SaveLoadService::LoadFromJSON(std::shared_ptr<class World> world, std::shared_ptr<class Player> player)
 {
     if (world->InitializeFromJSON("save.json"))
