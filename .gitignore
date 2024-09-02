@@ -2,6 +2,8 @@
 *.vcxproj
 *.filters
 *.user
+*.p7s
+*.nupkg
 Project/.vs/
 Project/x64/
 Project/*/x64/

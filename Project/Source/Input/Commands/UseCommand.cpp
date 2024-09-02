@@ -23,5 +23,9 @@ bool UseCommand::Execute(std::shared_ptr<World> world, std::shared_ptr<Entity> e
         {
             return player->SwapArmor();
         }break;
+        default:
+        {
+            return false;
+        }break;
     }
 }
