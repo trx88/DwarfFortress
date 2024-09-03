@@ -3,6 +3,8 @@
 #include "../../Domains/Entities/Player.h"
 #include "../../Domains/Entities/Enemy.h"
 #include <boost/signals2/signal.hpp>
+#include <chrono>
+#include <thread>
 
 CombatStateMachine::CombatStateMachine(std::shared_ptr<World> world)
 {
@@ -110,12 +112,14 @@ void CombatStateMachine::Update()
 			else
 			{
 				//Update View
+				currentState = GameState::Movement;
 				onPlayerDead();
 			}
 		} break;
 		default:
 			break;
 	}
+	//std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 bool CombatStateMachine::IsMovementPhase() const

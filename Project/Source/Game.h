@@ -20,7 +20,6 @@ private:
     std::shared_ptr<World> world;
     std::unique_ptr<MainView> mainView;
     std::unique_ptr<MainController> controller;
-    std::unique_ptr<InputManager> inputManager;
     void LoadGame(std::string jsonFile);
     void ReloadGame();
 };

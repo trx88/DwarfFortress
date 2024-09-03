@@ -18,7 +18,6 @@ void Game::Run()
 {
     while (true)
     {
-        //inputManager->ProcessInput();
         controller->Run();
     }
 }
@@ -28,9 +27,8 @@ void Game::LoadGame(std::string jsonFile)
     world = std::make_shared<World>();
     world->InitializeFromJSON(jsonFile);
 
-    inputManager = std::make_unique<InputManager>(world);
-    controller = std::make_unique<MainController>(world, inputManager.get());
-    inputManager->onReloadGame.connect([this]() { ReloadGame(); });
+    controller = std::make_unique<MainController>(world);
+    controller->onReloadGame.connect([this]() { ReloadGame(); });
 
     auto player = world->GetPlayer();
     mainView = std::make_unique<MainView>(world, player);

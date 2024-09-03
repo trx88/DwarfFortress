@@ -6,13 +6,15 @@
 #include "../Input/Commands/MoveCommand.h"
 #include "StateMachine/CombatStateMachine.h"
 
-MainController::MainController(std::shared_ptr<World> world, InputManager* inputManager)
+MainController::MainController(std::shared_ptr<World> world)
 {
 	this->world = world;
-	this->inputManager = inputManager;
+	//this->inputManager = inputManager;
+	inputManager = std::make_unique<InputManager>(world);
 	this->inputManager->onPlayerMoveEnded.connect([this](std::shared_ptr<Player> player) { OnPlayerMoved(player); });
-	combatStateMachine = std::make_unique<CombatStateMachine>(world);
-	combatStateMachine->onPlayerDead.connect([this]() { OnPlayerDead(); });
+	this->inputManager->onReloadGame.connect([this]() { OnReloadGame(); });
+	this->combatStateMachine = std::make_unique<CombatStateMachine>(world);
+	this->combatStateMachine->onPlayerDead.connect([this]() { OnPlayerDead(); });
 }
 
 MainController::~MainController()
@@ -26,11 +28,18 @@ void MainController::Run()
 	{
 		inputManager->ProcessInput();
 	}
+	//inputManager->ProcessInput();
+}
+
+void MainController::OnReloadGame()
+{
+	onReloadGame();
 }
 
 void MainController::OnPlayerDead()
 {
-	this->inputManager->onReloadGame();
+	//this->inputManager->onReloadGame();
+	exit(0);
 }
 
 void MainController::OnPlayerMoved(std::shared_ptr<Player> player)
