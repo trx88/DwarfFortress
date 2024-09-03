@@ -63,7 +63,15 @@
           "health": 2,
           "armor": 0,
           "damage": 2
-        }
+        },
+        "inventory": [
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
       },
       {
         "type": 1,
@@ -73,7 +81,15 @@
           "health": 6,
           "armor": 0,
           "damage": 4
-        }
+        },
+        "inventory": [
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
       },
       {
         "type": 1,
@@ -83,7 +99,15 @@
           "health": 8,
           "armor": 1,
           "damage": 5
-        }
+        },
+        "inventory": [
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
       }
     ],
     "obstacles": [

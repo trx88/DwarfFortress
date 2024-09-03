@@ -99,13 +99,13 @@ void World::parseEntities(const nlohmann::json& entitiesData)
         playerStatsData["damage"]);
     
     //Default inventory
-    for (auto const& items : playerInventoryData)
+    for (auto const& item : playerInventoryData)
     {
         player->AccessInventory()->StoreItem(std::make_shared<Item>(
-            items["name"],
-            items["type"],
-            items["modifier"],
-            items["stacks"]));
+            item["name"],
+            item["type"],
+            item["modifier"],
+            item["stacks"]));
     }
     player->SwapWeapons();//Equip unarmed
 
@@ -115,6 +115,7 @@ void World::parseEntities(const nlohmann::json& entitiesData)
     for (const auto& enemyData : entitiesData["enemies"])
     {
         auto enemyStatsData = enemyData["stats"];
+        auto enemyInventoryData = enemyData["inventory"];
         auto enemy = std::make_shared<Enemy>(
             worldData->GetEntityNextId(), 
             static_cast<EntityType>(enemyData["type"]),
@@ -123,6 +124,16 @@ void World::parseEntities(const nlohmann::json& entitiesData)
             enemyStatsData["health"],
             enemyStatsData["armor"],
             enemyStatsData["damage"]);
+
+        for (auto const& item : enemyInventoryData)
+        {
+            enemy->AccessInventory()->StoreItem(std::make_shared<Item>(
+                item["name"],
+                item["type"],
+                item["modifier"],
+                item["stacks"]));
+        }
+
         worldData->AddEntity(enemy);
     }
 

@@ -4,6 +4,7 @@
 Enemy::Enemy(int id, EntityType type, int row, int column, int health, int armor, int damage)
 	: Entity(id, type, row, column, health, armor, damage)
 {
+	inventory = std::make_unique<Inventory>();
 }
 
 Enemy::~Enemy()
@@ -25,5 +26,29 @@ nlohmann::json Enemy::EnemyToJSON()
 	jsonStatsObject["damage"] = static_cast<int>(statsData->GetDamage());
 	jsonEnemyObject["stats"] = jsonStatsObject;
 
+	nlohmann::json jsonInventoryObject = nlohmann::json::array();
+	for (const auto& item : inventory->GetItems())
+	{
+		nlohmann::json jsonItemObject = nlohmann::json::object();
+		jsonItemObject["name"] = item->GetName();
+		jsonItemObject["type"] = static_cast<int>(item->GetType());
+		jsonItemObject["modifier"] = item->GetModifier();
+		jsonItemObject["stacks"] = item->GetStacks();
+
+		jsonInventoryObject.push_back(jsonItemObject);
+	}
+
+	jsonEnemyObject["inventory"] = jsonInventoryObject;
+
 	return jsonEnemyObject;
+}
+
+std::vector<std::shared_ptr<Item>> Enemy::DropItems()
+{
+	auto items = inventory->GetItems();
+	for (const auto& item : items)
+	{
+		inventory->RemoveItem(item);
+	}
+	return items;
 }

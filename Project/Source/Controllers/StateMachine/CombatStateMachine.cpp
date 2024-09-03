@@ -99,13 +99,20 @@ void CombatStateMachine::Update()
 					currentState = GameState::PlayerTurn;
 				}
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		} break;
 
 		case GameState::CombatEnd:
 		{
 			if (player->GetHealth() > 0)
 			{
+				auto droppedItems = currentEnemy->DropItems();
+				for (const auto& item : droppedItems)
+				{
+					player->PickUpItem(item);
+					std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+				}
+
 				world->RemoveFromWorld(currentEnemy);
 				enemies.erase(std::remove(enemies.begin(), enemies.end(), currentEnemy), enemies.end());
 				currentEnemy = nullptr;
@@ -121,7 +128,7 @@ void CombatStateMachine::Update()
 					player->GameStateMovementMessage();
 					player->CombatWonMessage();
 				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(500));
+				std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			}
 			else
 			{
