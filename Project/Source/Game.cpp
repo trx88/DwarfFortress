@@ -27,7 +27,7 @@ void Game::LoadGame(std::string jsonFile)
     world = std::make_shared<World>();
     world->InitializeFromJSON(jsonFile);
 
-    controller = std::make_unique<MainController>(world);
+    controller = std::make_shared<MainController>(world);
     controller->onReloadGame.connect([this]() { ReloadGame(); });
 
     auto player = world->GetPlayer();
@@ -36,6 +36,7 @@ void Game::LoadGame(std::string jsonFile)
     world->SignalWorldUpdate();
     player->SignalPlayerStatsUpdate();
     player->AccessInventory()->SignalInventoryUpdate();
+    player->SignalPlayerActionUpdate();
 }
 
 void Game::ReloadGame()

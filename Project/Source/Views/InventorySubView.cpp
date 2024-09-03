@@ -32,7 +32,6 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
         }
         output += "\n";
     }
-    output += "\n";
     
     onInventorySubViewUpdated(id, output);
 }

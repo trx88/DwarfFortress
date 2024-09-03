@@ -31,7 +31,7 @@ bool CombatStateMachine::CheckForCombat()
 
 void CombatStateMachine::StartCombat()
 {
-	//Update View
+	player->GameStateCombatMessage();
 	playerTurns = 0;
 	enemyTurns = 0;
 	currentEnemy = enemies.front();
@@ -48,6 +48,10 @@ void CombatStateMachine::Update()
 			{
 				currentState = GameState::CombatStart;
 			}
+			else
+			{
+				player->GameStateMovementMessage();
+			}
 		} break;
 		case GameState::CombatStart:
 		{
@@ -59,6 +63,7 @@ void CombatStateMachine::Update()
 			int damageToApply = player->GetDamage() - currentEnemy->GetArmor();
 			int damageToApplyClamped = std::min(std::max(damageToApply, 0), 100);
 			currentEnemy->UpdateHealth(currentEnemy->GetHealth() - damageToApplyClamped);
+			player->DamageDealtMessage(damageToApplyClamped);
 			playerTurns++;
 
 			currentState = GameState::ResolveTurn;
@@ -68,6 +73,7 @@ void CombatStateMachine::Update()
 			int damageToApply = currentEnemy->GetDamage() - player->GetArmor();
 			int damageToApplyClamped = std::min(std::max(damageToApply, 0), 100);
 			player->UpdateHealth(player->GetHealth() - damageToApplyClamped);
+			player->DamageTakenMessage(damageToApplyClamped);
 			enemyTurns++;
 
 			currentState = GameState::ResolveTurn;
@@ -89,6 +95,7 @@ void CombatStateMachine::Update()
 					currentState = GameState::PlayerTurn;
 				}
 			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		} break;
 		case GameState::CombatEnd:
 		{
@@ -107,19 +114,23 @@ void CombatStateMachine::Update()
 				else
 				{
 					currentState = GameState::Movement;
+					player->GameStateMovementMessage();
+					player->CombatWonMessage();
 				}
 			}
 			else
 			{
 				//Update View
 				currentState = GameState::Movement;
+				player->GameStateMovementMessage();
+				player->CombatLostMessage();
 				onPlayerDead();
 			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		} break;
 		default:
 			break;
 	}
-	//std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
 bool CombatStateMachine::IsMovementPhase() const

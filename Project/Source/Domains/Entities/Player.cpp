@@ -1,10 +1,12 @@
 #include "Player.h"
 #include "Chest.h"
+#include "../../DataModels/PlayerActionsDataModel.h"
 
 Player::Player(int id, EntityType type, int row, int column, int health, int armor, int damage)
 	: Entity(id, type, row, column, health, armor, damage)
 {
 	inventory = std::make_unique<Inventory>();
+	playerActions = std::make_unique<PlayerActionsDataModel>();
 }
 
 Player::~Player()
@@ -32,6 +34,11 @@ void Player::UpdateDamage(int newDamage)
 void Player::SignalPlayerStatsUpdate()
 {
 	onPlayerStatsUpdated(statsData.get());
+}
+
+void Player::SignalPlayerActionUpdate()
+{
+	onPlayerActionMessageUpdated(playerActions.get());
 }
 
 bool Player::UsePotion()
@@ -139,12 +146,61 @@ bool Player::SwapArmor()
 	return false;
 }
 
+void Player::PickUpItem(std::shared_ptr<Item> item)
+{
+	inventory->StoreItem(item);
+	playerActions->ItemPickedUp(item);
+	SignalPlayerActionUpdate();
+}
+
 void Player::OpenChestAndStoreItems(std::shared_ptr<class Chest> chest)
 {
 	for (const auto& item : chest->GetChestContents())
 	{
-		inventory->StoreItem(item);
+		PickUpItem(item);
 	}
+}
+
+void Player::GameStateMovementMessage()
+{
+	playerActions->GameStateMovement();
+	SignalPlayerActionUpdate();
+}
+
+void Player::GameStateCombatMessage()
+{
+	playerActions->GameStateCombat();
+	SignalPlayerActionUpdate();
+}
+
+void Player::DamageDealtMessage(int damage)
+{
+	playerActions->DamageDealt(damage);
+	SignalPlayerActionUpdate();
+}
+
+void Player::DamageTakenMessage(int damage)
+{
+	playerActions->DamageTaken(damage);
+	SignalPlayerActionUpdate();
+}
+
+void Player::CombatWonMessage()
+{
+	playerActions->CombatWon();
+	SignalPlayerActionUpdate();
+}
+
+void Player::CombatLostMessage()
+{
+	playerActions->CombatLost();
+	SignalPlayerActionUpdate();
+}
+
+void Player::EmptyActionMessage()
+{
+	playerActions->EmptyAction();
+	SignalPlayerActionUpdate();
 }
 
 nlohmann::json Player::PlayerToJSON()

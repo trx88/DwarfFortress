@@ -40,7 +40,6 @@ void MapSubView::UpdateSubView(WorldDataModel* worldDataModel)
         output += "\n"; // Newline after each row
     }
 
-    output += "\n";
     onMapSubViewUpdated(id, output);
 
     //TODO: UI MOCKUP. SPLIT INTO SUBVIEWS

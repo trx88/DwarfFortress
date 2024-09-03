@@ -18,8 +18,8 @@ public:
 
 private:
     std::shared_ptr<World> world;
+    std::shared_ptr<MainController> controller;
     std::unique_ptr<MainView> mainView;
-    std::unique_ptr<MainController> controller;
     void LoadGame(std::string jsonFile);
     void ReloadGame();
 };
