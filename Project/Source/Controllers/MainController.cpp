@@ -8,11 +8,18 @@
 MainController::MainController(std::shared_ptr<World> world, InputManager* inputManager)
 {
 	this->world = world;
-	inputManager->onPlayerTurnEnded.connect([this](std::shared_ptr<Player> player) { OnPlayerMoved(player); });
+	this->inputManager = inputManager;
+	this->inputManager->onPlayerTurnEnded.connect([this](std::shared_ptr<Player> player) { OnPlayerMoved(player); });
 }
 
 MainController::~MainController()
 {
+	
+}
+
+void MainController::Run()
+{
+	inputManager->ProcessInput();
 }
 
 void MainController::OnPlayerMoved(std::shared_ptr<Player> player)
