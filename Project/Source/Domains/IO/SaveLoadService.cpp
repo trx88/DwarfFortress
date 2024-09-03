@@ -49,7 +49,7 @@ bool SaveLoadService::SaveToJSON(std::shared_ptr<class World> world, std::shared
 
     jsonData["entities"] = jsonEntities;
 
-    std::ofstream file("Save.json", std::ios::out | std::ios::trunc);
+    std::ofstream file("Data\\Save.json", std::ios::out | std::ios::trunc);
     if (!file.is_open())
     {
         std::cerr << "Unable to open or create file for writing: " << "save.json" << std::endl;
@@ -80,7 +80,7 @@ bool SaveLoadService::SaveToJSON(std::shared_ptr<class World> world, std::shared
 [[deprecated("Not used, since there's LoadGame from Game can be used for this.")]]
 bool SaveLoadService::LoadFromJSON(std::shared_ptr<class World> world, std::shared_ptr<class Player> player)
 {
-    if (world->InitializeFromJSON("save.json"))
+    if (world->InitializeFromJSON("Data\\Save.json"))
     {
         world->SignalWorldUpdate();
         player->SignalPlayerStatsUpdate();

@@ -17,7 +17,7 @@ bool LoadCommand::Execute(std::shared_ptr<World> world, std::shared_ptr<Entity> 
 	//After this successful command, InputManager will send a message to Game class that can use 
 	//initialization code for restarting the game, just from another JSON.
 	bool fileExists = true;
-	std::ifstream file("save.json");
+	std::ifstream file("Data\\Save.json");
 	if (!file.good())
 	{
 		fileExists = false;
