@@ -28,19 +28,20 @@ void Game::LoadGame(std::string jsonFile)
     world = std::make_shared<World>();
     world->InitializeFromJSON(jsonFile);
 
+    inputManager = std::make_unique<InputManager>(world);
+    controller = std::make_unique<MainController>(world, inputManager.get());
+    inputManager->onReloadGame.connect([this]() { ReloadGame(); });
+
     auto player = world->GetPlayer();
     mainView = std::make_unique<MainView>(world, player);
 
     world->SignalWorldUpdate();
     player->SignalPlayerStatsUpdate();
     player->AccessInventory()->SignalInventoryUpdate();
-
-    inputManager = std::make_unique<InputManager>(world);
-    controller = std::make_unique<MainController>(world, inputManager.get());
-    inputManager->onReloadGame.connect([this]() { ReloadGame(); });
 }
 
 void Game::ReloadGame()
 {
+    //Check for file, since it can happen after combat
     LoadGame("save.json");
 }

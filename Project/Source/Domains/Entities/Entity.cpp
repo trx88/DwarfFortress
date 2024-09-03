@@ -116,6 +116,36 @@ void Entity::SetPosition(int newRow, int newColumn)
 	column = newColumn;
 }
 
+int Entity::GetHealth() const
+{
+	return statsData->GetHealthPoints();
+}
+
+int Entity::GetArmor() const
+{
+	return statsData->GetArmorPoints();
+}
+
+int Entity::GetDamage() const
+{
+	return statsData->GetDamage();
+}
+
+void Entity::UpdateHealth(int newHealth)
+{
+	statsData->SetHealthPoints(newHealth);
+}
+
+void Entity::UpdateArmor(int newArmor)
+{
+	statsData->SetArmorPoints(newArmor);
+}
+
+void Entity::UpdateDamage(int newDamage)
+{
+	statsData->SetDamage(newDamage);
+}
+
 nlohmann::json Entity::EntityToJSON()
 {
 	nlohmann::json jsonData;

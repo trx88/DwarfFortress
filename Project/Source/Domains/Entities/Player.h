@@ -13,9 +13,9 @@ public:
 	Player(int id, EntityType type, int row, int column, int health, int armor, int damage);
 	~Player();
 	Inventory* AccessInventory() { return inventory.get(); }
-	void UpdateHealth(int newHealth);
-	void UpdateArmor(int newArmor);
-	void UpdateDamage(int newDamage);
+	void UpdateHealth(int newHealth) override;
+	void UpdateArmor(int newArmor) override;
+	void UpdateDamage(int newDamage) override;
 
 	boost::signals2::signal<void(EntityStatsDataModel* entityStatsDataModel)> onPlayerStatsUpdated;
 	void SignalPlayerStatsUpdate();

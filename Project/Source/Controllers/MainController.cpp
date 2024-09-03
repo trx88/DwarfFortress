@@ -4,27 +4,41 @@
 #include "../Domains/Entities/Player.h"
 #include "../Domains/Entities/Enemy.h"
 #include "../Input/Commands/MoveCommand.h"
+#include "StateMachine/CombatStateMachine.h"
 
 MainController::MainController(std::shared_ptr<World> world, InputManager* inputManager)
 {
 	this->world = world;
 	this->inputManager = inputManager;
-	this->inputManager->onPlayerTurnEnded.connect([this](std::shared_ptr<Player> player) { OnPlayerMoved(player); });
+	this->inputManager->onPlayerMoveEnded.connect([this](std::shared_ptr<Player> player) { OnPlayerMoved(player); });
+	combatStateMachine = std::make_unique<CombatStateMachine>(world);
+	combatStateMachine->onPlayerDead.connect([this]() { OnPlayerDead(); });
 }
 
 MainController::~MainController()
 {
 	
 }
-
 void MainController::Run()
 {
-	inputManager->ProcessInput();
+	combatStateMachine->Update();
+	if (combatStateMachine->IsMovementPhase())
+	{
+		inputManager->ProcessInput();
+	}
+}
+
+void MainController::OnPlayerDead()
+{
+	this->inputManager->onReloadGame();
 }
 
 void MainController::OnPlayerMoved(std::shared_ptr<Player> player)
 {
-	MoveEnemies(player);
+	if (!combatStateMachine->CombatStarted())
+	{
+		MoveEnemies(player);
+	}
 }
 
 void MainController::MoveEnemies(std::shared_ptr<Player> player)

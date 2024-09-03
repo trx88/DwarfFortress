@@ -233,6 +233,20 @@ std::shared_ptr<Player> World::GetPlayer()
     return std::static_pointer_cast<Player>(worldData->GetEntitiesByType(EntityType::Player).back());
 }
 
+std::vector<std::shared_ptr<class Enemy>> World::GetEnemiesAtPosition(int row, int column)
+{
+    std::vector<std::shared_ptr<Enemy>> enemies;
+    for (const auto& enemy : worldData->GetEntitiesByType(EntityType::Enemy))
+    {
+        if (enemy->GetRow() == row && enemy->GetColumn() == column)
+        {
+            enemies.push_back(std::static_pointer_cast<Enemy>(enemy));
+        }
+    }
+
+    return enemies;
+}
+
 std::vector<std::shared_ptr<Enemy>> World::GetEnemies()
 {
     std::vector<std::shared_ptr<Enemy>> enemies;
@@ -268,6 +282,12 @@ std::vector<std::shared_ptr<class Entity>> World::GetObstacles()
     }
 
     return obstacles;
+}
+
+void World::RemoveFromWorld(std::shared_ptr<Entity> entity)
+{
+    worldData->RemoveEntity(entity);
+    SignalWorldUpdate();
 }
 
 void World::SignalWorldUpdate()

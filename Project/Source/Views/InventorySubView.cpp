@@ -12,7 +12,7 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
     std::string output;
     std::string equippedText = " Equipped";
     //Adding spaces to avoid clearing the console since it flickers.
-    std::string equippedTest = "         ";
+    std::string unquippedText = "         ";
 
     output += "\x1B[92m-INVENTORY-\n";
     output += "\x1B[37m"; //Print in white
@@ -28,7 +28,7 @@ void InventorySubView::UpdateSubView(InventoryDataModel* inventoryDataModel)
         }
         else
         {
-            output += equippedTest;
+            output += unquippedText;
         }
         output += "\n";
     }

@@ -82,7 +82,7 @@ void InputManager::ProcessInput()
                 //HACK to end player's turn only when move command has been executed.
                 if (dynamic_cast<MoveCommand*>(command))
                 {
-                    onPlayerTurnEnded(player);
+                    onPlayerMoveEnded(player);
                 }
                 if (dynamic_cast<LoadCommand*>(command))
                 {

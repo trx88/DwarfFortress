@@ -34,6 +34,13 @@ public:
 	char GetTileSymbol() const;
 	std::string GetTileSymbolForPrint();
 	void SetPosition(int newRow, int newColumn);
+	int GetHealth() const;
+	int GetArmor() const;
+	int GetDamage() const;
+	virtual void UpdateHealth(int newHealth);
+	virtual void UpdateArmor(int newArmor);
+	virtual void UpdateDamage(int newDamage);
+
 	nlohmann::json EntityToJSON();
 };
 
