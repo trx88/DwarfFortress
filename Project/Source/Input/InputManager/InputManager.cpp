@@ -83,7 +83,6 @@ void InputManager::ProcessInput()
                 if (dynamic_cast<MoveCommand*>(command))
                 {
                     onPlayerMoveEnded(player);
-                    player->EmptyActionMessage();
                 }
                 if (dynamic_cast<LoadCommand*>(command))
                 {

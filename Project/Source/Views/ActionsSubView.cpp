@@ -14,8 +14,8 @@ void ActionsSubView::UpdateSubView(PlayerActionsDataModel* playerActionsDataMode
 
     //Adding spaces to avoid clearing the console since it flickers.
     std::string emptyTextTitle = "                ";
-    std::string emptyTextGameState = "   ";
-    std::string emptyTextGameAction = " ";
+    std::string emptyTextGameState = "              ";
+    std::string emptyTextGameAction = "              ";
 
     output += "\x1B[92m--ACTIONS--" + emptyTextTitle + "\n";
     
