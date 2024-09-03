@@ -11,7 +11,7 @@ MapSubView::MapSubView(int id, std::shared_ptr<World> world)
 void MapSubView::UpdateSubView(WorldDataModel* worldDataModel)
 {
     std::string output;
-    output += "\033[H"; // Move cursor to top-left to avoid flickering
+    output += "\033[H"; //Move cursor to top-left to avoid flickering
 
     output += "\x1B[33m---LEGEND--\n";
     output += "\x1B[37mPlayer:\x1B[36mP \x1B[37mEnemy:\x1B[31mE \x1B[37mChest:\x1B[35mC \x1B[37mMountain:\x1B[37mM \x1B[37mTree:\x1B[32mT\n";
@@ -21,28 +21,23 @@ void MapSubView::UpdateSubView(WorldDataModel* worldDataModel)
 
     output += "----MAP----\n";
 
-    // Render the entire world, including entities
+    //Render the entire world, including entities
     for (int row = 0; row < worldDataModel->GetHeight(); ++row) {
         for (int column = 0; column < worldDataModel->GetWidth(); ++column) {
-            // Check if there's an entity at this position
+            //Check if there's an entity at this position
             auto entity = worldDataModel->GetEntityAt(row, column);
             if (entity)
             {
-                output += entity->GetTileSymbolForPrint();  // Render the entity's symbol
+                output += entity->GetTileSymbolForPrint();  //Render the entity's symbol
             }
             else
             {
-                // Otherwise, render the ground tile
-                //output += worldDataModel->GetTileAt(row, column);
+                //Otherwise, render the ground tile
                 output += "\x1B[33m.";
             }
         }
-        output += "\n"; // Newline after each row
+        output += "\n";
     }
 
     onMapSubViewUpdated(id, output);
-
-    //TODO: UI MOCKUP. SPLIT INTO SUBVIEWS
-    /*output << "--ACTIONS--" << "\n";
-    output << "You picked up a chest containing 1 POTION" << "\n";*/
 }

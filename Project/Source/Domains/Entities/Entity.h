@@ -26,20 +26,26 @@ public:
 	Entity();
 	Entity(int id, EntityType type, int row, int column);
 	Entity(int id, EntityType type, int row, int column, int health, int armor, int damage);
-	virtual ~Entity(); //Should be virtual, since this class will be inherited.
+	virtual ~Entity(); //Virtual, since this class will be inherited.
+
+#pragma region Getters
 	int GetId() const;
 	int GetRow() const;
 	int GetColumn() const;
 	EntityType GetType() const;
 	char GetTileSymbol() const;
 	std::string GetTileSymbolForPrint();
-	void SetPosition(int newRow, int newColumn);
 	int GetHealth() const;
 	int GetArmor() const;
 	int GetDamage() const;
+#pragma endregion
+
+#pragma region Setters
+	void SetPosition(int newRow, int newColumn);
 	virtual void UpdateHealth(int newHealth);
 	virtual void UpdateArmor(int newArmor);
 	virtual void UpdateDamage(int newDamage);
+#pragma endregion
 
 	nlohmann::json EntityToJSON();
 };

@@ -16,4 +16,5 @@ public:
 	~MainView();
 	void UpsertOutputBuffer(int id, std::string outputBuffer);
 	void RenderSubViews();
+	void SetConsoleSize(int consoleWidth, int consoleHeight);
 };

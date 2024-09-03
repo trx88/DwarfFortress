@@ -48,12 +48,12 @@ bool World::InitializeFromJSON(const std::string& filePath)
     try
     {
         std::ifstream file(filePath);
-        if (!file.is_open()) {
+        if (!file.is_open()) 
+        {
             throw std::runtime_error("Could not open file: " + filePath);
         }
 
         nlohmann::json jsonData;
-        //std::cout << file;
         file >> jsonData;
 
         worldData->ClearEntities();
@@ -165,17 +165,16 @@ bool World::IsTileValidForMovement(int row, int column) const
     auto entity = worldData->GetEntityAt(row, column);
     if (entity) 
     {
-        // Check if the entity is something that should block movement
         //Enemy should not block movement (at least in my mind), instead battle should ensue. 
         if (entity->GetType() == EntityType::Mountain ||
             entity->GetType() == EntityType::Tree)
         {
             return false; // Block movement
         }
-        // If it's a chest or another non-blocking entity, allow movement
+        //If it's a chest or another non-blocking entity, allow movement
         return true;
     }
-    // No entity at this position, so it's not occupied
+    //No entity at this position, so it's not occupied
     return true;
 }
 
@@ -196,7 +195,7 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
             }
         }
 
-        // Enemy leaves the chest in place
+        //Enemy leaves the chest in place
         if (entity->GetType() == EntityType::Enemy)
         {
             auto entityAtOldPosition = worldData->GetEntityAt(oldRow, oldColumn);
@@ -206,20 +205,20 @@ bool World::MoveEntity(std::shared_ptr<Entity> entity, int newRow, int newColumn
             }
             else
             {
-                // Clear the old position by setting it to an empty tile
+                //Clear the old position by setting it to an empty tile
                 worldData->SetTileAt(oldRow, oldColumn, '.');
             }
         }
         else
         {
-            // Clear the old position by setting it to an empty tile for any other case
+            //Clear the old position by setting it to an empty tile for any other case
             worldData->SetTileAt(oldRow, oldColumn, '.');
         }
 
-        // Update entity position
+        //Update entity position
         entity->SetPosition(newRow, newColumn);
 
-        // Emit signal indicating the entity has moved
+        //Emit signal indicating the entity has moved
         SignalWorldUpdate();
 
         return true;

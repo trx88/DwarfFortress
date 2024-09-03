@@ -35,7 +35,6 @@ bool Inventory::UseItem(std::shared_ptr<Item> item, EntityStatsDataModel* statsD
 {
 	if (itemHandlerService->Handle(item, statsData))
 	{
-
 		return true;
 	}
 	return false;

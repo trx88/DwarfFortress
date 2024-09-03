@@ -38,14 +38,14 @@ std::shared_ptr<Entity> WorldDataModel::GetEntityAt(int row, int column) const
 {
     for (const auto& pair : entities)
     {
-        const auto& entity = pair.second;  // Access the shared_ptr<Entity>
+        const auto& entity = pair.second;
         if (entity->GetRow() == row && entity->GetColumn() == column)
         {
             return entity;
         }
     }
 
-    return nullptr;  // Return nullptr if no entity is found at the position
+    return nullptr;
 }
 
 std::shared_ptr<Entity> WorldDataModel::GetEntityById(int id) const

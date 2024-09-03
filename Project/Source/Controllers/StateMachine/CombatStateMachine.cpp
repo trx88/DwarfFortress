@@ -31,7 +31,6 @@ bool CombatStateMachine::CheckForCombat()
 
 void CombatStateMachine::StartCombat()
 {
-	player->GameStateCombatMessage();
 	playerTurns = 0;
 	enemyTurns = 0;
 	currentEnemy = enemies.front();
@@ -46,6 +45,7 @@ void CombatStateMachine::Update()
 		{
 			if (CheckForCombat())
 			{
+				player->GameStateCombatMessage();
 				currentState = GameState::CombatStart;
 			}
 			else
@@ -53,11 +53,13 @@ void CombatStateMachine::Update()
 				player->GameStateMovementMessage();
 			}
 		} break;
+
 		case GameState::CombatStart:
 		{
 			StartCombat();
 			currentState = GameState::PlayerTurn;
 		} break;
+
 		case GameState::PlayerTurn:
 		{
 			int damageToApply = player->GetDamage() - currentEnemy->GetArmor();
@@ -68,6 +70,7 @@ void CombatStateMachine::Update()
 
 			currentState = GameState::ResolveTurn;
 		} break;
+
 		case GameState::EnemyTurn:
 		{
 			int damageToApply = currentEnemy->GetDamage() - player->GetArmor();
@@ -78,6 +81,7 @@ void CombatStateMachine::Update()
 
 			currentState = GameState::ResolveTurn;
 		} break;
+
 		case GameState::ResolveTurn:
 		{
 			if (player->GetHealth() <= 0 || currentEnemy->GetHealth() <= 0)
@@ -97,11 +101,11 @@ void CombatStateMachine::Update()
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		} break;
+
 		case GameState::CombatEnd:
 		{
 			if (player->GetHealth() > 0)
 			{
-				//Update View
 				world->RemoveFromWorld(currentEnemy);
 				enemies.erase(std::remove(enemies.begin(), enemies.end(), currentEnemy), enemies.end());
 				currentEnemy = nullptr;
@@ -117,6 +121,7 @@ void CombatStateMachine::Update()
 					player->GameStateMovementMessage();
 					player->CombatWonMessage();
 				}
+				std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			}
 			else
 			{
@@ -125,9 +130,10 @@ void CombatStateMachine::Update()
 				player->GameStateMovementMessage();
 				player->CombatLostMessage();
 				onPlayerDead();
+				std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		} break;
+
 		default:
 			break;
 	}

@@ -20,24 +20,7 @@ MainView::MainView(std::shared_ptr<class World> world, std::shared_ptr<class Pla
 	inventorySubView->onInventorySubViewUpdated.connect([this](int id, std::string output) {UpsertOutputBuffer(id, output); });
 	actionsSubView->onActionsSubViewUpdated.connect([this](int id, std::string output) {UpsertOutputBuffer(id, output); });
 
-	int consoleWidth = 120;
-	int consoleHeight = 120;
-
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	// Set screen buffer size
-	COORD bufferSize;
-	bufferSize.X = consoleWidth;
-	bufferSize.Y = consoleHeight;
-	SetConsoleScreenBufferSize(hConsole, bufferSize);
-
-	// Set window size
-	SMALL_RECT windowSize;
-	windowSize.Left = 0;
-	windowSize.Top = 0;
-	windowSize.Right = consoleWidth - 1;
-	windowSize.Bottom = consoleHeight - 1;
-	SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+	SetConsoleSize(120, 120);
 }
 
 MainView::~MainView()
@@ -60,4 +43,21 @@ void MainView::RenderSubViews()
 	}
 
 	std::cout << output.str();
+}
+
+void MainView::SetConsoleSize(int consoleWidth, int consoleHeight)
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	COORD bufferSize;
+	bufferSize.X = consoleWidth;
+	bufferSize.Y = consoleHeight;
+	SetConsoleScreenBufferSize(hConsole, bufferSize);
+
+	SMALL_RECT windowSize;
+	windowSize.Left = 0;
+	windowSize.Top = 0;
+	windowSize.Right = consoleWidth - 1;
+	windowSize.Bottom = consoleHeight - 1;
+	SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
 }

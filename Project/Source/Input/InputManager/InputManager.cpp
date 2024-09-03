@@ -24,10 +24,10 @@ void InputManager::ProcessInput()
     char input;
 
     //SPECIFICALLY FOR WINDOWS OS
-    // Check if a key has been pressed
+    //Check if a key has been pressed
     if (_kbhit())
     {
-        input = _getch(); // Capture single keypress without showing it in the console
+        input = _getch(); //Capture single keypress without showing it in the console
 
         Command* command = nullptr;
 
@@ -79,7 +79,7 @@ void InputManager::ProcessInput()
         {
             if (command->Execute(world, player))
             {
-                //HACK to end player's turn only when move command has been executed.
+                //End player's turn only when move command has been executed.
                 if (dynamic_cast<MoveCommand*>(command))
                 {
                     onPlayerMoveEnded(player);

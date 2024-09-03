@@ -9,7 +9,6 @@
 MainController::MainController(std::shared_ptr<World> world)
 {
 	this->world = world;
-	//this->inputManager = inputManager;
 	inputManager = std::make_unique<InputManager>(world);
 	this->inputManager->onPlayerMoveEnded.connect([this](std::shared_ptr<Player> player) { OnPlayerMoved(player); });
 	this->inputManager->onReloadGame.connect([this]() { OnReloadGame(); });
@@ -28,7 +27,6 @@ void MainController::Run()
 	{
 		inputManager->ProcessInput();
 	}
-	//inputManager->ProcessInput();
 }
 
 void MainController::OnReloadGame()
@@ -38,7 +36,6 @@ void MainController::OnReloadGame()
 
 void MainController::OnPlayerDead()
 {
-	//this->inputManager->onReloadGame();
 	exit(0);
 }
 
@@ -100,27 +97,6 @@ void MainController::MoveEnemies(std::shared_ptr<Player> player)
 				}
 			}
 		}
-
-		//If direct path is blocked
-		/*if (player->GetColumn() != enemy->GetColumn() && player->GetRow() != enemy->GetRow())
-		{
-			if (deltaColumn < 0 && world->IsTileValidForMovement(enemy->GetRow(), enemy->GetColumn() - 1))
-			{
-				command = new MoveCommand(-1, 0);
-			}
-			else if (deltaColumn > 0 && world->IsTileValidForMovement(enemy->GetRow(), enemy->GetColumn() + 1))
-			{
-				command = new MoveCommand(1, 0);
-			}
-			else if (deltaRow < 0 && world->IsTileValidForMovement(enemy->GetRow() - 1, enemy->GetColumn()))
-			{
-				command = new MoveCommand(0, -1);
-			}
-			else if (deltaRow > 0 && world->IsTileValidForMovement(enemy->GetRow() + 1, enemy->GetColumn()))
-			{
-				command = new MoveCommand(0, 1);
-			}
-		}*/
 
 		if (command)
 		{
