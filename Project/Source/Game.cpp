@@ -7,7 +7,7 @@
 
 Game::Game()
 {
-    LoadGame("Data\\World.json");
+    LoadGame("World.json");
 }
 
 Game::~Game()
@@ -42,5 +42,5 @@ void Game::LoadGame(std::string jsonFile)
 void Game::ReloadGame()
 {
     //Check for file, since it can happen after combat
-    LoadGame("save.json");
+    LoadGame("Save.json");
 }

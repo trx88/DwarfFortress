@@ -1,0 +1,263 @@
+{
+  "width": 10,
+  "height": 10,
+  "legend": {
+    ".": "empty",
+    "P": "player",
+    "E": "enemy",
+    "M": "mountain",
+    "T": "tree",
+    "C": "chest"
+  },
+  "mapTileTypes": {
+    "player": 0,
+    "enemy": 1,
+    "mountaint": 2,
+    "tree": 3,
+    "chest": 4,
+    "undefined": 5
+  },
+  "map": [
+    [ "P", "M", ".", ".", ".", "T", ".", ".", "C", "M" ],
+    [ ".", ".", ".", "T", ".", ".", ".", "T", ".", "." ],
+    [ "T", ".", "M", ".", ".", ".", "M", ".", ".", "." ],
+    [ ".", ".", ".", ".", "C", ".", ".", ".", ".", "T" ],
+    [ "M", ".", "T", ".", ".", ".", ".", "M", ".", "." ],
+    [ ".", "T", ".", "E", ".", "C", ".", ".", ".", "M" ],
+    [ ".", ".", ".", ".", ".", ".", "T", ".", "E", "." ],
+    [ "C", ".", "M", ".", ".", ".", ".", "M", ".", "." ],
+    [ ".", "T", ".", "T", ".", ".", ".", "T", ".", "." ],
+    [ ".", ".", ".", "M", ".", ".", ".", ".", "T", "." ]
+  ],
+  "entities": {
+    "player": {
+      "type": 0,
+      "column": 0,
+      "row": 0,
+      "stats": {
+        "health": 10,
+        "armor": 0,
+        "damage": 0
+      },
+      "inventory": [
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          },
+          {
+            "name": "UNARMED",
+            "type": 1,
+            "modifier": 2,
+            "stacks": 1
+          }
+      ]
+    },
+    "enemies": [
+      {
+        "type": 1,
+        "column": 3,
+        "row": 5,
+        "stats": {
+          "health": 2,
+          "armor": 0,
+          "damage": 2
+        }
+      },
+      {
+        "type": 1,
+        "column": 8,
+        "row": 6,
+        "stats": {
+          "health": 6,
+          "armor": 0,
+          "damage": 4
+        }
+      },
+      {
+        "type": 1,
+        "column": 9,
+        "row": 9,
+        "stats": {
+          "health": 8,
+          "armor": 1,
+          "damage": 5
+        }
+      }
+    ],
+    "obstacles": [
+      {
+        "type": 2,
+        "column": 1,
+        "row": 0
+      },
+      {
+        "type": 3,
+        "column": 5,
+        "row": 0
+      },
+      {
+        "type": 2,
+        "column": 9,
+        "row": 0
+      },
+      {
+        "type": 3,
+        "column": 3,
+        "row": 1
+      },
+      {
+        "type": 3,
+        "column": 7,
+        "row": 1
+      },
+      {
+        "type": 3,
+        "column": 0,
+        "row": 2
+      },
+      {
+        "type": 2,
+        "column": 2,
+        "row": 2
+      },
+      {
+        "type": 2,
+        "column": 6,
+        "row": 2
+      },
+      {
+        "type": 3,
+        "column": 9,
+        "row": 3
+      },
+      {
+        "type": 2,
+        "column": 0,
+        "row": 4
+      },
+      {
+        "type": 3,
+        "column": 2,
+        "row": 4
+      },
+      {
+        "type": 2,
+        "column": 7,
+        "row": 4
+      },
+      {
+        "type": 3,
+        "column": 1,
+        "row": 5
+      },
+      {
+        "type": 2,
+        "column": 9,
+        "row": 5
+      },
+      {
+        "type": 3,
+        "column": 6,
+        "row": 6
+      },
+      {
+        "type": 2,
+        "column": 2,
+        "row": 7
+      },
+      {
+        "type": 2,
+        "column": 7,
+        "row": 7
+      },
+      {
+        "type": 3,
+        "column": 1,
+        "row": 8
+      },
+      {
+        "type": 3,
+        "column": 3,
+        "row": 8
+      },
+      {
+        "type": 3,
+        "column": 7,
+        "row": 8
+      },
+      {
+        "type": 2,
+        "column": 3,
+        "row": 9
+      }
+    ],
+    "chests": [
+      {
+        "type": 4,
+        "column": 8,
+        "row": 0,
+        "contents": [
+          {
+            "name": "BREASTPLATE",
+            "type": 2,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
+      },
+      {
+        "type": 4,
+        "column": 4,
+        "row": 3,
+        "contents": [
+          {
+            "name": "LONGSWORD",
+            "type": 1,
+            "modifier": 4,
+            "stacks": 1
+          },
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 2
+          }
+        ]
+      },
+      {
+        "type": 4,
+        "column": 5,
+        "row": 5,
+        "contents": [
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          },
+          {
+            "name": "POTION",
+            "type": 0,
+            "modifier": 2,
+            "stacks": 1
+          }
+        ]
+      },
+      {
+        "type": 4,
+        "column": 0,
+        "row": 7,
+        "contents": [
+          {
+            "name": "SCALE MAIL",
+            "type": 2,
+            "modifier": 4,
+            "stacks": 1
+          }
+        ]
+      }
+    ]
+  }
+}

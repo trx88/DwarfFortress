@@ -49,7 +49,7 @@ bool SaveLoadService::SaveToJSON(std::shared_ptr<class World> world, std::shared
 
     jsonData["entities"] = jsonEntities;
 
-    std::ofstream file("save.json", std::ios::out | std::ios::trunc);
+    std::ofstream file("Save.json", std::ios::out | std::ios::trunc);
     if (!file.is_open())
     {
         std::cerr << "Unable to open or create file for writing: " << "save.json" << std::endl;
