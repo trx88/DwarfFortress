@@ -44,7 +44,7 @@ Player actions include two main pieces of information: game state (movement phas
 It's a cosmetic feature that improves quality of life since player can see what's happening during each game state.
 
 ## Player input
-Player input uses commands to keep everything clean, and to leave an option for undo/redo functionality down the line. Input manager lives inside the main controller, and based on player input executes commands that in turn use domains to manipulate the models.
+Player input uses commands to keep everything clean, and to leave an option for undo/redo functionality down the line. Input manager lives inside the main controller, and based on player input executes commands that in turn use domains to manipulate the models. Input manager takes one key at a time without showing it in the console (removing the need to press the enter key which makes it more "game-like").
 
 ## Inventory & item usage
 Inventory contains the standard methods for storing, droping and using items. Item usage (drinking potions and equipping weapons and armor) is done via chain of responsibility. Item handler service contains the list of all item handlers, and when player uses the item (whether consumable or equipable), item is passed through the chain by the item handler service. Each item handler tries to handle the item, and passes the item to its successor if it's not the right handler. Adds a layer of abstraction to the solution.
