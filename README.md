@@ -18,7 +18,7 @@ In order to avoid a direct manipulation of models by a controller, domain were c
 ### World domain
 World domain handles the map, specifically map initialization, getting entities and removing them on the map, moving entities and signaling that world model has been updated (positions on the map).
 ### Entity domains
-Entity domains are: base entity, player, enemy, chest. Each domain is responsible for all basic functionalities that those entities require and also for signaling the view that something has been updated (player domain only for stats and inventory).
+Entity domains are: base entity, player, enemy, chest. Each domain is responsible for all basic functionalities that those entities require and also for signaling the view that something has been updated (world domain for map and player domain for stats and inventory).
 ### Inventory domain
 Inventory domains include item logic, actual inventory logic, and item usage logic (more on that below). Inventory domain signals the view when change in inventory happens.
 ### IO domain
