@@ -3,7 +3,7 @@
 ![PlayixFortress_Screenshot](https://github.com/user-attachments/assets/7294f107-6dd1-4fb9-9f0f-d359a7c1a73e)
 ## Windows build of the game
 ### Link
-
+https://drive.google.com/drive/folders/1zyjYQ9NDXyUr7sYTjOyO-sej2Y14GGGX?usp=sharing
 ### Repository
 Zip file of game build is also in the repository.
 ## 3rd party packages
