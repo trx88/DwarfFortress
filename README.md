@@ -5,7 +5,7 @@
 ### Link
 
 ### Repository
-Zip file for build of the game is also in the repository.
+Zip file of game build is also in the repository.
 ## 3rd party packages
 * Boost 1.86 (Signal)
 * nlohmann/json
