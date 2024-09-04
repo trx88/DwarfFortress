@@ -4,6 +4,7 @@
 ## Windows build of the game
 ### Link
 https://drive.google.com/drive/folders/1zyjYQ9NDXyUr7sYTjOyO-sej2Y14GGGX?usp=sharing
+[link]([url](https://drive.google.com/drive/folders/1zyjYQ9NDXyUr7sYTjOyO-sej2Y14GGGX?usp=sharing)){:target="_blank"}
 ### Repository
 Zip file of game build is also in the repository.
 ## 3rd party packages
