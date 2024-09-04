@@ -53,4 +53,4 @@ Inventory contains the standard methods for storing, droping and using items. It
 A simple state machine was created to handle the combat phase. It checks for combat start after each player input (when player and enemy overlap on the map, the combat phase is triggered), initiates combat, alternates between player and enemy turns (with resolve turn state in between to check for health) and ends the combat. Since it can happen that two enemies are on the same map tile, state machine will start another combat phase when the previous one is finished. Enemies are removed from the world when defeated and they drop an item from their inventory.
 
 ## Saving & loading
-A service was created for this purpose. It serializes all necessary entities on the map, and the map as well.
+A service was created for this purpose. It serializes all necessary entities on the map (and the map as well) to a JSON file.
