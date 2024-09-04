@@ -38,19 +38,19 @@ Uses WorldDataModel to create a map output for rendering.
 Uses EntityStatsDataModel to create a player stats output for rendering.
 ### InventorySubView
 Uses InventoryDataModel to create a player inventory output for rendering.
-### InventorySubView
+### ActionsSubView
 Uses PlayerActionsDataModel to create a player actions output for rendering.
-Player actions include two main pieces of information: game state (movement phase and combat phase) and last player's action (damage dealt, damage taken, picked up item, etc.).
+Player actions include two main pieces of information: game state (movement phase and combat phase) and player's last action (damage dealt, damage taken, picked up item, etc.).
 It's a cosmetic feature that improves quality of life since player can see what's happening during each game state.
 
 ## Player input
-Player input uses commands to keep everything clean, and to leave an option for undo/redo functionality (not in requirements). Input manager lives inside the main controller, and based on player input executes commands that in turn use domains to manipulate the models.
+Player input uses commands to keep everything clean, and to leave an option for undo/redo functionality down the line. Input manager lives inside the main controller, and based on player input executes commands that in turn use domains to manipulate the models.
 
 ## Inventory & item usage
 Inventory contains the standard methods for storing, droping and using items. Item usage (drinking potions and equipping weapons and armor) is done via chain of responsibility. Item handler service contains the list of all item handlers, and when player uses the item (whether consumable or equipable), item is passed through the chain by the item handler service. Each item handler tries to handle the item, and passes the item to its successor if it's not the right handler. Adds a layer of abstraction to the solution.
 
 ## Combat state machine
-A simple state machine was created to handle the combat phase. It checks for combat start (when player and enemy overlap on the map), initiates combat, alternates between player and enemy turns (with resolve turn state in between to check for health) and ends the combat. Since it can happen that two enemies are on the same map tile, stata machine will start another combat phase when the previous one is finished. Enemies are removed from the world when defeated and they drop an item from their inventory.
+A simple state machine was created to handle the combat phase. It checks for combat start after each player input (when player and enemy overlap on the map, the combat phase is triggered), initiates combat, alternates between player and enemy turns (with resolve turn state in between to check for health) and ends the combat. Since it can happen that two enemies are on the same map tile, state machine will start another combat phase when the previous one is finished. Enemies are removed from the world when defeated and they drop an item from their inventory.
 
 ## Saving & loading
 A service was created for this purpose. It serializes all necessary entities on the map, and the map as well.
